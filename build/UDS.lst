@@ -1,0 +1,2452 @@
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"UDS.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/UDS.c"
+  20              		.section	.text.getSID,"ax",%progbits
+  21              		.align	1
+  22              		.global	getSID
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	getSID:
+  28              	.LVL0:
+  29              	.LFB137:
+   1:Core/Src/UDS.c **** #include "UDS.h"
+   2:Core/Src/UDS.c **** 
+   3:Core/Src/UDS.c **** #define NRC 0x7F
+   4:Core/Src/UDS.c **** #define INVALID_LENGTH 0x13
+   5:Core/Src/UDS.c **** #define INVALID_DID 0x31
+   6:Core/Src/UDS.c **** #define WRONG_KEY 0x35
+   7:Core/Src/UDS.c **** #define ACCESS_DENIED 0x33
+   8:Core/Src/UDS.c **** 
+   9:Core/Src/UDS.c **** uint8_t Seed[4] = {0x01, 0x08, 0x82, 0x21};
+  10:Core/Src/UDS.c **** uint8_t Key[4] = {0x00, 0x00, 0x00, 0x00};
+  11:Core/Src/UDS.c **** 
+  12:Core/Src/UDS.c **** uint8_t flag_SeedProvided = 0;
+  13:Core/Src/UDS.c **** uint8_t flag_SecurityUnlocked = 0;
+  14:Core/Src/UDS.c **** 
+  15:Core/Src/UDS.c **** uint16_t newStdId = 0x0000;
+  16:Core/Src/UDS.c **** 
+  17:Core/Src/UDS.c **** uint8_t getSID(uint8_t data[])
+  18:Core/Src/UDS.c **** {
+  30              		.loc 1 18 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  19:Core/Src/UDS.c ****     return data[1];
+  35              		.loc 1 19 5 view .LVU1
+  20:Core/Src/UDS.c **** }
+  36              		.loc 1 20 1 is_stmt 0 view .LVU2
+  37 0000 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+  38              	.LVL1:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 2
+
+
+  39              		.loc 1 20 1 view .LVU3
+  40 0002 7047     		bx	lr
+  41              		.cfi_endproc
+  42              	.LFE137:
+  44              		.section	.text.getDID,"ax",%progbits
+  45              		.align	1
+  46              		.global	getDID
+  47              		.syntax unified
+  48              		.thumb
+  49              		.thumb_func
+  51              	getDID:
+  52              	.LVL2:
+  53              	.LFB138:
+  21:Core/Src/UDS.c **** 
+  22:Core/Src/UDS.c **** uint16_t getDID(uint8_t data[])
+  23:Core/Src/UDS.c **** {
+  54              		.loc 1 23 1 is_stmt 1 view -0
+  55              		.cfi_startproc
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  24:Core/Src/UDS.c ****     uint16_t tmp = 0x0000;
+  59              		.loc 1 24 5 view .LVU5
+  25:Core/Src/UDS.c ****     tmp = data[2];
+  60              		.loc 1 25 5 view .LVU6
+  61              		.loc 1 25 15 is_stmt 0 view .LVU7
+  62 0000 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+  63              	.LVL3:
+  26:Core/Src/UDS.c ****     tmp <<= 8;
+  64              		.loc 1 26 5 is_stmt 1 view .LVU8
+  27:Core/Src/UDS.c ****     tmp += data[3];
+  65              		.loc 1 27 5 view .LVU9
+  66              		.loc 1 27 16 is_stmt 0 view .LVU10
+  67 0002 C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
+  68              	.LVL4:
+  69              		.loc 1 27 9 view .LVU11
+  70 0004 00EB0320 		add	r0, r0, r3, lsl #8
+  71              	.LVL5:
+  28:Core/Src/UDS.c ****     return tmp;
+  72              		.loc 1 28 5 is_stmt 1 view .LVU12
+  29:Core/Src/UDS.c **** }
+  73              		.loc 1 29 1 is_stmt 0 view .LVU13
+  74 0008 80B2     		uxth	r0, r0
+  75              		.loc 1 29 1 view .LVU14
+  76 000a 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE138:
+  80              		.section	.rodata.CAN1_Send.str1.4,"aMS",%progbits,1
+  81              		.align	2
+  82              	.LC0:
+  83 0000 54657374 		.ascii	"Tester Request: \000"
+  83      65722052 
+  83      65717565 
+  83      73743A20 
+  83      00
+  84              		.section	.text.CAN1_Send,"ax",%progbits
+  85              		.align	1
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 3
+
+
+  86              		.global	CAN1_Send
+  87              		.syntax unified
+  88              		.thumb
+  89              		.thumb_func
+  91              	CAN1_Send:
+  92              	.LFB139:
+  30:Core/Src/UDS.c **** 
+  31:Core/Src/UDS.c **** void CAN1_Send()
+  32:Core/Src/UDS.c **** {
+  93              		.loc 1 32 1 is_stmt 1 view -0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0000 38B5     		push	{r3, r4, r5, lr}
+  98              		.cfi_def_cfa_offset 16
+  99              		.cfi_offset 3, -16
+ 100              		.cfi_offset 4, -12
+ 101              		.cfi_offset 5, -8
+ 102              		.cfi_offset 14, -4
+  33:Core/Src/UDS.c ****     USART3_SendString((uint8_t *)"Tester Request: ");
+ 103              		.loc 1 33 5 view .LVU16
+ 104 0002 0A48     		ldr	r0, .L7
+ 105 0004 FFF7FEFF 		bl	USART3_SendString
+ 106              	.LVL6:
+  34:Core/Src/UDS.c ****     PrintCANLog(CAN1_pHeader.StdId, CAN1_DATA_TX);
+ 107              		.loc 1 34 5 view .LVU17
+ 108              		.loc 1 34 29 is_stmt 0 view .LVU18
+ 109 0008 094C     		ldr	r4, .L7+4
+ 110              		.loc 1 34 5 view .LVU19
+ 111 000a 0A4D     		ldr	r5, .L7+8
+ 112 000c 2946     		mov	r1, r5
+ 113 000e 2088     		ldrh	r0, [r4]
+ 114 0010 FFF7FEFF 		bl	PrintCANLog
+ 115              	.LVL7:
+  35:Core/Src/UDS.c ****     if (HAL_CAN_AddTxMessage(&hcan1, &CAN1_pHeader, CAN1_DATA_TX,
+ 116              		.loc 1 35 5 is_stmt 1 view .LVU20
+ 117              		.loc 1 35 9 is_stmt 0 view .LVU21
+ 118 0014 084B     		ldr	r3, .L7+12
+ 119 0016 2A46     		mov	r2, r5
+ 120 0018 2146     		mov	r1, r4
+ 121 001a 0848     		ldr	r0, .L7+16
+ 122 001c FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 123              	.LVL8:
+ 124              		.loc 1 35 8 discriminator 1 view .LVU22
+ 125 0020 00B9     		cbnz	r0, .L6
+ 126              	.L3:
+  36:Core/Src/UDS.c ****                              &CAN1_pTxMailbox) != HAL_OK)
+  37:Core/Src/UDS.c ****     {
+  38:Core/Src/UDS.c ****         Error_Handler();
+  39:Core/Src/UDS.c ****     }
+  40:Core/Src/UDS.c **** }
+ 127              		.loc 1 40 1 view .LVU23
+ 128 0022 38BD     		pop	{r3, r4, r5, pc}
+ 129              	.L6:
+  38:Core/Src/UDS.c ****     }
+ 130              		.loc 1 38 9 is_stmt 1 view .LVU24
+ 131 0024 FFF7FEFF 		bl	Error_Handler
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 4
+
+
+ 132              	.LVL9:
+ 133              		.loc 1 40 1 is_stmt 0 view .LVU25
+ 134 0028 FBE7     		b	.L3
+ 135              	.L8:
+ 136 002a 00BF     		.align	2
+ 137              	.L7:
+ 138 002c 00000000 		.word	.LC0
+ 139 0030 00000000 		.word	CAN1_pHeader
+ 140 0034 00000000 		.word	CAN1_DATA_TX
+ 141 0038 00000000 		.word	CAN1_pTxMailbox
+ 142 003c 00000000 		.word	hcan1
+ 143              		.cfi_endproc
+ 144              	.LFE139:
+ 146              		.section	.text.CAN2_Send,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	CAN2_Send
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	CAN2_Send:
+ 154              	.LFB140:
+  41:Core/Src/UDS.c **** 
+  42:Core/Src/UDS.c **** void CAN2_Send()
+  43:Core/Src/UDS.c **** {
+ 155              		.loc 1 43 1 is_stmt 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159 0000 38B5     		push	{r3, r4, r5, lr}
+ 160              		.cfi_def_cfa_offset 16
+ 161              		.cfi_offset 3, -16
+ 162              		.cfi_offset 4, -12
+ 163              		.cfi_offset 5, -8
+ 164              		.cfi_offset 14, -4
+  44:Core/Src/UDS.c ****     PrintCANLog(CAN2_pHeader.StdId, CAN2_DATA_TX);
+ 165              		.loc 1 44 5 view .LVU27
+ 166              		.loc 1 44 29 is_stmt 0 view .LVU28
+ 167 0002 084C     		ldr	r4, .L13
+ 168              		.loc 1 44 5 view .LVU29
+ 169 0004 084D     		ldr	r5, .L13+4
+ 170 0006 2946     		mov	r1, r5
+ 171 0008 2088     		ldrh	r0, [r4]
+ 172 000a FFF7FEFF 		bl	PrintCANLog
+ 173              	.LVL10:
+  45:Core/Src/UDS.c ****     if (HAL_CAN_AddTxMessage(&hcan2, &CAN2_pHeader, CAN2_DATA_TX,
+ 174              		.loc 1 45 5 is_stmt 1 view .LVU30
+ 175              		.loc 1 45 9 is_stmt 0 view .LVU31
+ 176 000e 074B     		ldr	r3, .L13+8
+ 177 0010 2A46     		mov	r2, r5
+ 178 0012 2146     		mov	r1, r4
+ 179 0014 0648     		ldr	r0, .L13+12
+ 180 0016 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 181              	.LVL11:
+ 182              		.loc 1 45 8 discriminator 1 view .LVU32
+ 183 001a 00B9     		cbnz	r0, .L12
+ 184              	.L9:
+  46:Core/Src/UDS.c ****                              &CAN2_pTxMailbox) != HAL_OK)
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 5
+
+
+  47:Core/Src/UDS.c ****     {
+  48:Core/Src/UDS.c ****         Error_Handler();
+  49:Core/Src/UDS.c ****     }
+  50:Core/Src/UDS.c **** }
+ 185              		.loc 1 50 1 view .LVU33
+ 186 001c 38BD     		pop	{r3, r4, r5, pc}
+ 187              	.L12:
+  48:Core/Src/UDS.c ****     }
+ 188              		.loc 1 48 9 is_stmt 1 view .LVU34
+ 189 001e FFF7FEFF 		bl	Error_Handler
+ 190              	.LVL12:
+ 191              		.loc 1 50 1 is_stmt 0 view .LVU35
+ 192 0022 FBE7     		b	.L9
+ 193              	.L14:
+ 194              		.align	2
+ 195              	.L13:
+ 196 0024 00000000 		.word	CAN2_pHeader
+ 197 0028 00000000 		.word	CAN2_DATA_TX
+ 198 002c 00000000 		.word	CAN2_pTxMailbox
+ 199 0030 00000000 		.word	hcan2
+ 200              		.cfi_endproc
+ 201              	.LFE140:
+ 203              		.section	.text.FormatCANFrame,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	FormatCANFrame
+ 206              		.syntax unified
+ 207              		.thumb
+ 208              		.thumb_func
+ 210              	FormatCANFrame:
+ 211              	.LVL13:
+ 212              	.LFB141:
+  51:Core/Src/UDS.c **** 
+  52:Core/Src/UDS.c **** void FormatCANFrame(uint8_t data[])
+  53:Core/Src/UDS.c **** {
+ 213              		.loc 1 53 1 is_stmt 1 view -0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217              		@ link register save eliminated.
+  54:Core/Src/UDS.c ****     for (uint8_t loopIndx = data[0] + 1; loopIndx < 8; loopIndx++)
+ 218              		.loc 1 54 5 view .LVU37
+ 219              	.LBB2:
+ 220              		.loc 1 54 10 view .LVU38
+ 221              		.loc 1 54 33 is_stmt 0 view .LVU39
+ 222 0000 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 223              		.loc 1 54 18 view .LVU40
+ 224 0002 0133     		adds	r3, r3, #1
+ 225 0004 DBB2     		uxtb	r3, r3
+ 226              	.LVL14:
+ 227              		.loc 1 54 5 view .LVU41
+ 228 0006 01E0     		b	.L16
+ 229              	.L17:
+ 230              		.loc 1 54 64 is_stmt 1 discriminator 2 view .LVU42
+ 231 0008 0133     		adds	r3, r3, #1
+ 232              	.LVL15:
+ 233              		.loc 1 54 64 is_stmt 0 discriminator 2 view .LVU43
+ 234 000a DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 6
+
+
+ 235              	.LVL16:
+ 236              	.L16:
+ 237              		.loc 1 54 51 is_stmt 1 discriminator 1 view .LVU44
+ 238 000c 072B     		cmp	r3, #7
+ 239 000e 05D8     		bhi	.L19
+  55:Core/Src/UDS.c ****     {
+  56:Core/Src/UDS.c ****         if (data[loopIndx] == 0x00)
+ 240              		.loc 1 56 9 view .LVU45
+ 241              		.loc 1 56 17 is_stmt 0 view .LVU46
+ 242 0010 C25C     		ldrb	r2, [r0, r3]	@ zero_extendqisi2
+ 243              		.loc 1 56 12 view .LVU47
+ 244 0012 002A     		cmp	r2, #0
+ 245 0014 F8D1     		bne	.L17
+  57:Core/Src/UDS.c ****         {
+  58:Core/Src/UDS.c ****             data[loopIndx] = 0x55;
+ 246              		.loc 1 58 13 is_stmt 1 view .LVU48
+ 247              		.loc 1 58 28 is_stmt 0 view .LVU49
+ 248 0016 5522     		movs	r2, #85
+ 249 0018 C254     		strb	r2, [r0, r3]
+ 250 001a F5E7     		b	.L17
+ 251              	.L19:
+ 252              		.loc 1 58 28 view .LVU50
+ 253              	.LBE2:
+  59:Core/Src/UDS.c ****         }
+  60:Core/Src/UDS.c ****     }
+  61:Core/Src/UDS.c **** }
+ 254              		.loc 1 61 1 view .LVU51
+ 255 001c 7047     		bx	lr
+ 256              		.cfi_endproc
+ 257              	.LFE141:
+ 259              		.section	.text.calculate_key_from_seed,"ax",%progbits
+ 260              		.align	1
+ 261              		.global	calculate_key_from_seed
+ 262              		.syntax unified
+ 263              		.thumb
+ 264              		.thumb_func
+ 266              	calculate_key_from_seed:
+ 267              	.LVL17:
+ 268              	.LFB142:
+  62:Core/Src/UDS.c **** 
+  63:Core/Src/UDS.c **** void calculate_key_from_seed(uint8_t *input, uint8_t *output)
+  64:Core/Src/UDS.c **** {
+ 269              		.loc 1 64 1 is_stmt 1 view -0
+ 270              		.cfi_startproc
+ 271              		@ args = 0, pretend = 0, frame = 0
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+  65:Core/Src/UDS.c ****     output[0] = input[0] ^ input[1];
+ 274              		.loc 1 65 5 view .LVU53
+ 275              		.loc 1 65 22 is_stmt 0 view .LVU54
+ 276 0000 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 277              		.loc 1 65 33 view .LVU55
+ 278 0002 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 279              		.loc 1 65 15 view .LVU56
+ 280 0004 5340     		eors	r3, r3, r2
+ 281 0006 0B70     		strb	r3, [r1]
+  66:Core/Src/UDS.c ****     output[1] = input[1] + input[2];
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 7
+
+
+ 282              		.loc 1 66 5 is_stmt 1 view .LVU57
+ 283              		.loc 1 66 22 is_stmt 0 view .LVU58
+ 284 0008 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 285              		.loc 1 66 33 view .LVU59
+ 286 000a 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 287              		.loc 1 66 26 view .LVU60
+ 288 000c 1344     		add	r3, r3, r2
+ 289              		.loc 1 66 15 view .LVU61
+ 290 000e 4B70     		strb	r3, [r1, #1]
+  67:Core/Src/UDS.c ****     output[2] = input[2] ^ input[3];
+ 291              		.loc 1 67 5 is_stmt 1 view .LVU62
+ 292              		.loc 1 67 22 is_stmt 0 view .LVU63
+ 293 0010 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 294              		.loc 1 67 33 view .LVU64
+ 295 0012 C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+ 296              		.loc 1 67 15 view .LVU65
+ 297 0014 5340     		eors	r3, r3, r2
+ 298 0016 8B70     		strb	r3, [r1, #2]
+  68:Core/Src/UDS.c ****     output[3] = input[3] + input[0];
+ 299              		.loc 1 68 5 is_stmt 1 view .LVU66
+ 300              		.loc 1 68 22 is_stmt 0 view .LVU67
+ 301 0018 C378     		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 302              		.loc 1 68 33 view .LVU68
+ 303 001a 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 304              		.loc 1 68 26 view .LVU69
+ 305 001c 1344     		add	r3, r3, r2
+ 306              		.loc 1 68 15 view .LVU70
+ 307 001e CB70     		strb	r3, [r1, #3]
+  69:Core/Src/UDS.c **** }
+ 308              		.loc 1 69 1 view .LVU71
+ 309 0020 7047     		bx	lr
+ 310              		.cfi_endproc
+ 311              	.LFE142:
+ 313              		.section	.text.cmp_key,"ax",%progbits
+ 314              		.align	1
+ 315              		.global	cmp_key
+ 316              		.syntax unified
+ 317              		.thumb
+ 318              		.thumb_func
+ 320              	cmp_key:
+ 321              	.LVL18:
+ 322              	.LFB143:
+  70:Core/Src/UDS.c **** 
+  71:Core/Src/UDS.c **** bool cmp_key(uint8_t *key1, uint8_t *key2, uint8_t len)
+  72:Core/Src/UDS.c **** {
+ 323              		.loc 1 72 1 is_stmt 1 view -0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+  73:Core/Src/UDS.c ****     for (uint8_t i = 0; i < len; i++)
+ 327              		.loc 1 73 5 view .LVU73
+ 328              	.LBB3:
+ 329              		.loc 1 73 10 view .LVU74
+ 330              		.loc 1 73 18 is_stmt 0 view .LVU75
+ 331 0000 0023     		movs	r3, #0
+ 332              	.LVL19:
+ 333              		.loc 1 73 27 is_stmt 1 discriminator 1 view .LVU76
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 8
+
+
+ 334 0002 9342     		cmp	r3, r2
+ 335 0004 0FD2     		bcs	.L30
+ 336              	.LBE3:
+  72:Core/Src/UDS.c ****     for (uint8_t i = 0; i < len; i++)
+ 337              		.loc 1 72 1 is_stmt 0 view .LVU77
+ 338 0006 00B5     		push	{lr}
+ 339              		.cfi_def_cfa_offset 4
+ 340              		.cfi_offset 14, -4
+ 341              	.L24:
+ 342              	.LBB4:
+  74:Core/Src/UDS.c ****     {
+  75:Core/Src/UDS.c ****         if (key1[i] != key2[i])
+ 343              		.loc 1 75 9 is_stmt 1 view .LVU78
+ 344              		.loc 1 75 17 is_stmt 0 view .LVU79
+ 345 0008 10F803E0 		ldrb	lr, [r0, r3]	@ zero_extendqisi2
+ 346              		.loc 1 75 28 view .LVU80
+ 347 000c 11F803C0 		ldrb	ip, [r1, r3]	@ zero_extendqisi2
+ 348              		.loc 1 75 12 view .LVU81
+ 349 0010 E645     		cmp	lr, ip
+ 350 0012 06D1     		bne	.L25
+  73:Core/Src/UDS.c ****     {
+ 351              		.loc 1 73 35 is_stmt 1 discriminator 2 view .LVU82
+ 352 0014 0133     		adds	r3, r3, #1
+ 353              	.LVL20:
+  73:Core/Src/UDS.c ****     {
+ 354              		.loc 1 73 35 is_stmt 0 discriminator 2 view .LVU83
+ 355 0016 DBB2     		uxtb	r3, r3
+ 356              	.LVL21:
+  73:Core/Src/UDS.c ****     {
+ 357              		.loc 1 73 27 is_stmt 1 discriminator 1 view .LVU84
+ 358 0018 9342     		cmp	r3, r2
+ 359 001a F5D3     		bcc	.L24
+ 360              	.LBE4:
+  76:Core/Src/UDS.c ****         {
+  77:Core/Src/UDS.c ****             return 0;
+  78:Core/Src/UDS.c ****         }
+  79:Core/Src/UDS.c ****     }
+  80:Core/Src/UDS.c ****     return 1;
+ 361              		.loc 1 80 12 is_stmt 0 view .LVU85
+ 362 001c 0120     		movs	r0, #1
+ 363              	.LVL22:
+ 364              	.L23:
+  81:Core/Src/UDS.c **** }
+ 365              		.loc 1 81 1 view .LVU86
+ 366 001e 5DF804FB 		ldr	pc, [sp], #4
+ 367              	.LVL23:
+ 368              	.L25:
+ 369              	.LBB5:
+  77:Core/Src/UDS.c ****         }
+ 370              		.loc 1 77 20 view .LVU87
+ 371 0022 0020     		movs	r0, #0
+ 372              	.LVL24:
+  77:Core/Src/UDS.c ****         }
+ 373              		.loc 1 77 20 view .LVU88
+ 374 0024 FBE7     		b	.L23
+ 375              	.LVL25:
+ 376              	.L30:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 9
+
+
+ 377              		.cfi_def_cfa_offset 0
+ 378              		.cfi_restore 14
+  77:Core/Src/UDS.c ****         }
+ 379              		.loc 1 77 20 view .LVU89
+ 380              	.LBE5:
+  80:Core/Src/UDS.c **** }
+ 381              		.loc 1 80 12 view .LVU90
+ 382 0026 0120     		movs	r0, #1
+ 383              	.LVL26:
+ 384              		.loc 1 81 1 view .LVU91
+ 385 0028 7047     		bx	lr
+ 386              		.cfi_endproc
+ 387              	.LFE143:
+ 389              		.section	.rodata.checkFormat.str1.4,"aMS",%progbits,1
+ 390              		.align	2
+ 391              	.LC1:
+ 392 0000 496E7661 		.ascii	"Invalid Service ID\012\000"
+ 392      6C696420 
+ 392      53657276 
+ 392      69636520 
+ 392      49440A00 
+ 393              		.section	.text.checkFormat,"ax",%progbits
+ 394              		.align	1
+ 395              		.global	checkFormat
+ 396              		.syntax unified
+ 397              		.thumb
+ 398              		.thumb_func
+ 400              	checkFormat:
+ 401              	.LVL27:
+ 402              	.LFB144:
+  82:Core/Src/UDS.c **** 
+  83:Core/Src/UDS.c **** bool checkFormat(uint8_t data[])
+  84:Core/Src/UDS.c **** {
+ 403              		.loc 1 84 1 is_stmt 1 view -0
+ 404              		.cfi_startproc
+ 405              		@ args = 0, pretend = 0, frame = 0
+ 406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407              		.loc 1 84 1 is_stmt 0 view .LVU93
+ 408 0000 08B5     		push	{r3, lr}
+ 409              		.cfi_def_cfa_offset 8
+ 410              		.cfi_offset 3, -8
+ 411              		.cfi_offset 14, -4
+  85:Core/Src/UDS.c ****     // data[1] is the Service ID
+  86:Core/Src/UDS.c ****     // data[0] is the length of the data
+  87:Core/Src/UDS.c ****     switch (data[1])
+ 412              		.loc 1 87 5 is_stmt 1 view .LVU94
+ 413              		.loc 1 87 17 is_stmt 0 view .LVU95
+ 414 0002 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 415              		.loc 1 87 5 view .LVU96
+ 416 0004 272B     		cmp	r3, #39
+ 417 0006 08D0     		beq	.L32
+ 418 0008 2E2B     		cmp	r3, #46
+ 419 000a 0DD0     		beq	.L33
+ 420 000c 222B     		cmp	r3, #34
+ 421 000e 10D1     		bne	.L34
+  88:Core/Src/UDS.c ****     {
+  89:Core/Src/UDS.c ****     case 0x22:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 10
+
+
+  90:Core/Src/UDS.c ****         if (data[0] == 0x03)
+ 422              		.loc 1 90 9 is_stmt 1 view .LVU97
+ 423              		.loc 1 90 17 is_stmt 0 view .LVU98
+ 424 0010 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 425              		.loc 1 90 12 view .LVU99
+ 426 0012 032B     		cmp	r3, #3
+ 427 0014 12D0     		beq	.L36
+  91:Core/Src/UDS.c ****             return true;
+  92:Core/Src/UDS.c ****         return false;
+ 428              		.loc 1 92 16 view .LVU100
+ 429 0016 0020     		movs	r0, #0
+ 430              	.LVL28:
+ 431              		.loc 1 92 16 view .LVU101
+ 432 0018 0FE0     		b	.L35
+ 433              	.LVL29:
+ 434              	.L32:
+  93:Core/Src/UDS.c ****         break;
+ 435              		.loc 1 93 9 is_stmt 1 view .LVU102
+  94:Core/Src/UDS.c ****     case 0x27:
+  95:Core/Src/UDS.c ****         if (data[0] == 0x02 || data[0] == 0x06)
+ 436              		.loc 1 95 9 view .LVU103
+ 437              		.loc 1 95 17 is_stmt 0 view .LVU104
+ 438 001a 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 439              		.loc 1 95 12 view .LVU105
+ 440 001c 022B     		cmp	r3, #2
+ 441 001e 0FD0     		beq	.L37
+ 442              		.loc 1 95 29 discriminator 1 view .LVU106
+ 443 0020 062B     		cmp	r3, #6
+ 444 0022 0FD0     		beq	.L38
+  96:Core/Src/UDS.c ****             return true;
+  97:Core/Src/UDS.c ****         return false;
+ 445              		.loc 1 97 16 view .LVU107
+ 446 0024 0020     		movs	r0, #0
+ 447              	.LVL30:
+ 448              		.loc 1 97 16 view .LVU108
+ 449 0026 08E0     		b	.L35
+ 450              	.LVL31:
+ 451              	.L33:
+  98:Core/Src/UDS.c ****         break;
+ 452              		.loc 1 98 9 is_stmt 1 view .LVU109
+  99:Core/Src/UDS.c ****     case 0x2E:
+ 100:Core/Src/UDS.c ****         if (data[0] == 0x05)
+ 453              		.loc 1 100 9 view .LVU110
+ 454              		.loc 1 100 17 is_stmt 0 view .LVU111
+ 455 0028 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 456              		.loc 1 100 12 view .LVU112
+ 457 002a 052B     		cmp	r3, #5
+ 458 002c 0CD0     		beq	.L39
+ 101:Core/Src/UDS.c ****             return true;
+ 102:Core/Src/UDS.c ****         return false;
+ 459              		.loc 1 102 16 view .LVU113
+ 460 002e 0020     		movs	r0, #0
+ 461              	.LVL32:
+ 462              		.loc 1 102 16 view .LVU114
+ 463 0030 03E0     		b	.L35
+ 464              	.LVL33:
+ 465              	.L34:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 11
+
+
+ 103:Core/Src/UDS.c ****     default:
+ 104:Core/Src/UDS.c ****         USART3_SendString((uint8_t *)"Invalid Service ID\n");
+ 466              		.loc 1 104 9 is_stmt 1 view .LVU115
+ 467 0032 0648     		ldr	r0, .L41
+ 468              	.LVL34:
+ 469              		.loc 1 104 9 is_stmt 0 view .LVU116
+ 470 0034 FFF7FEFF 		bl	USART3_SendString
+ 471              	.LVL35:
+ 105:Core/Src/UDS.c ****         return false;
+ 472              		.loc 1 105 9 is_stmt 1 view .LVU117
+ 473              		.loc 1 105 16 is_stmt 0 view .LVU118
+ 474 0038 0020     		movs	r0, #0
+ 475              	.L35:
+ 106:Core/Src/UDS.c ****         break;
+ 476              		.loc 1 106 9 is_stmt 1 view .LVU119
+ 107:Core/Src/UDS.c ****     }
+ 108:Core/Src/UDS.c **** }
+ 477              		.loc 1 108 1 is_stmt 0 view .LVU120
+ 478 003a 08BD     		pop	{r3, pc}
+ 479              	.LVL36:
+ 480              	.L36:
+  91:Core/Src/UDS.c ****         return false;
+ 481              		.loc 1 91 20 view .LVU121
+ 482 003c 0120     		movs	r0, #1
+ 483              	.LVL37:
+  91:Core/Src/UDS.c ****         return false;
+ 484              		.loc 1 91 20 view .LVU122
+ 485 003e FCE7     		b	.L35
+ 486              	.LVL38:
+ 487              	.L37:
+  96:Core/Src/UDS.c ****         return false;
+ 488              		.loc 1 96 20 view .LVU123
+ 489 0040 0120     		movs	r0, #1
+ 490              	.LVL39:
+  96:Core/Src/UDS.c ****         return false;
+ 491              		.loc 1 96 20 view .LVU124
+ 492 0042 FAE7     		b	.L35
+ 493              	.LVL40:
+ 494              	.L38:
+  96:Core/Src/UDS.c ****         return false;
+ 495              		.loc 1 96 20 view .LVU125
+ 496 0044 0120     		movs	r0, #1
+ 497              	.LVL41:
+  96:Core/Src/UDS.c ****         return false;
+ 498              		.loc 1 96 20 view .LVU126
+ 499 0046 F8E7     		b	.L35
+ 500              	.LVL42:
+ 501              	.L39:
+ 101:Core/Src/UDS.c ****         return false;
+ 502              		.loc 1 101 20 view .LVU127
+ 503 0048 0120     		movs	r0, #1
+ 504              	.LVL43:
+ 101:Core/Src/UDS.c ****         return false;
+ 505              		.loc 1 101 20 view .LVU128
+ 506 004a F6E7     		b	.L35
+ 507              	.L42:
+ 508              		.align	2
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 12
+
+
+ 509              	.L41:
+ 510 004c 00000000 		.word	.LC1
+ 511              		.cfi_endproc
+ 512              	.LFE144:
+ 514              		.section	.text.checkDID,"ax",%progbits
+ 515              		.align	1
+ 516              		.global	checkDID
+ 517              		.syntax unified
+ 518              		.thumb
+ 519              		.thumb_func
+ 521              	checkDID:
+ 522              	.LVL44:
+ 523              	.LFB145:
+ 109:Core/Src/UDS.c **** 
+ 110:Core/Src/UDS.c **** bool checkDID(uint8_t data[])
+ 111:Core/Src/UDS.c **** {
+ 524              		.loc 1 111 1 is_stmt 1 view -0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 0, uses_anonymous_args = 0
+ 528              		@ link register save eliminated.
+ 112:Core/Src/UDS.c ****     if (data[2] == 0x01 && data[3] == 0x23)
+ 529              		.loc 1 112 5 view .LVU130
+ 530              		.loc 1 112 13 is_stmt 0 view .LVU131
+ 531 0000 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 532              		.loc 1 112 8 view .LVU132
+ 533 0002 012B     		cmp	r3, #1
+ 534 0004 01D0     		beq	.L47
+ 113:Core/Src/UDS.c ****         return true;
+ 114:Core/Src/UDS.c ****     return false;
+ 535              		.loc 1 114 12 view .LVU133
+ 536 0006 0020     		movs	r0, #0
+ 537              	.LVL45:
+ 538              		.loc 1 114 12 view .LVU134
+ 539 0008 7047     		bx	lr
+ 540              	.LVL46:
+ 541              	.L47:
+ 112:Core/Src/UDS.c ****     if (data[2] == 0x01 && data[3] == 0x23)
+ 542              		.loc 1 112 32 discriminator 1 view .LVU135
+ 543 000a C378     		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 112:Core/Src/UDS.c ****     if (data[2] == 0x01 && data[3] == 0x23)
+ 544              		.loc 1 112 25 discriminator 1 view .LVU136
+ 545 000c 232B     		cmp	r3, #35
+ 546 000e 01D0     		beq	.L46
+ 547              		.loc 1 114 12 view .LVU137
+ 548 0010 0020     		movs	r0, #0
+ 549              	.LVL47:
+ 550              		.loc 1 114 12 view .LVU138
+ 551 0012 7047     		bx	lr
+ 552              	.LVL48:
+ 553              	.L46:
+ 113:Core/Src/UDS.c ****         return true;
+ 554              		.loc 1 113 16 view .LVU139
+ 555 0014 0120     		movs	r0, #1
+ 556              	.LVL49:
+ 115:Core/Src/UDS.c **** }
+ 557              		.loc 1 115 1 view .LVU140
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 13
+
+
+ 558 0016 7047     		bx	lr
+ 559              		.cfi_endproc
+ 560              	.LFE145:
+ 562              		.section	.rodata.UART_ReadString.str1.4,"aMS",%progbits,1
+ 563              		.align	2
+ 564              	.LC2:
+ 565 0000 496E7661 		.ascii	"Invalid Input\012\000"
+ 565      6C696420 
+ 565      496E7075 
+ 565      740A00
+ 566              		.section	.text.UART_ReadString,"ax",%progbits
+ 567              		.align	1
+ 568              		.global	UART_ReadString
+ 569              		.syntax unified
+ 570              		.thumb
+ 571              		.thumb_func
+ 573              	UART_ReadString:
+ 574              	.LVL50:
+ 575              	.LFB146:
+ 116:Core/Src/UDS.c **** 
+ 117:Core/Src/UDS.c **** void UART_ReadString(uint8_t *buf, uint8_t *data, uint8_t len)
+ 118:Core/Src/UDS.c **** {
+ 576              		.loc 1 118 1 is_stmt 1 view -0
+ 577              		.cfi_startproc
+ 578              		@ args = 0, pretend = 0, frame = 0
+ 579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 580              		.loc 1 118 1 is_stmt 0 view .LVU142
+ 581 0000 08B5     		push	{r3, lr}
+ 582              		.cfi_def_cfa_offset 8
+ 583              		.cfi_offset 3, -8
+ 584              		.cfi_offset 14, -4
+ 585 0002 8446     		mov	ip, r0
+ 119:Core/Src/UDS.c ****     if (buf[0] != 0)
+ 586              		.loc 1 119 5 is_stmt 1 view .LVU143
+ 587              		.loc 1 119 12 is_stmt 0 view .LVU144
+ 588 0004 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 589              		.loc 1 119 8 view .LVU145
+ 590 0006 C3B1     		cbz	r3, .L49
+ 591 0008 0846     		mov	r0, r1
+ 592              	.LVL51:
+ 120:Core/Src/UDS.c ****     {
+ 121:Core/Src/UDS.c ****         data[0] = len;
+ 593              		.loc 1 121 9 is_stmt 1 view .LVU146
+ 594              		.loc 1 121 17 is_stmt 0 view .LVU147
+ 595 000a 0A70     		strb	r2, [r1]
+ 122:Core/Src/UDS.c ****         for (uint8_t i = 1; i <= len; i++)
+ 596              		.loc 1 122 9 is_stmt 1 view .LVU148
+ 597              	.LBB6:
+ 598              		.loc 1 122 14 view .LVU149
+ 599              	.LVL52:
+ 600              		.loc 1 122 22 is_stmt 0 view .LVU150
+ 601 000c 0123     		movs	r3, #1
+ 602              		.loc 1 122 9 view .LVU151
+ 603 000e 06E0     		b	.L50
+ 604              	.LVL53:
+ 605              	.L51:
+ 123:Core/Src/UDS.c ****         {
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 14
+
+
+ 124:Core/Src/UDS.c ****             data[i] = buf[i - 1];
+ 606              		.loc 1 124 13 is_stmt 1 view .LVU152
+ 607              		.loc 1 124 26 is_stmt 0 view .LVU153
+ 608 0010 0CEB0301 		add	r1, ip, r3
+ 609 0014 11F8011C 		ldrb	r1, [r1, #-1]	@ zero_extendqisi2
+ 610              		.loc 1 124 21 view .LVU154
+ 611 0018 C154     		strb	r1, [r0, r3]
+ 122:Core/Src/UDS.c ****         for (uint8_t i = 1; i <= len; i++)
+ 612              		.loc 1 122 40 is_stmt 1 discriminator 3 view .LVU155
+ 613 001a 0133     		adds	r3, r3, #1
+ 614              	.LVL54:
+ 122:Core/Src/UDS.c ****         for (uint8_t i = 1; i <= len; i++)
+ 615              		.loc 1 122 40 is_stmt 0 discriminator 3 view .LVU156
+ 616 001c DBB2     		uxtb	r3, r3
+ 617              	.LVL55:
+ 618              	.L50:
+ 122:Core/Src/UDS.c ****         for (uint8_t i = 1; i <= len; i++)
+ 619              		.loc 1 122 31 is_stmt 1 discriminator 1 view .LVU157
+ 620 001e 9342     		cmp	r3, r2
+ 621 0020 F6D9     		bls	.L51
+ 622              	.LBE6:
+ 125:Core/Src/UDS.c ****         }
+ 126:Core/Src/UDS.c ****         for (uint8_t i = len + 1; i < 8; i++)
+ 623              		.loc 1 126 9 view .LVU158
+ 624              	.LBB7:
+ 625              		.loc 1 126 14 view .LVU159
+ 626              		.loc 1 126 22 is_stmt 0 view .LVU160
+ 627 0022 0132     		adds	r2, r2, #1
+ 628              	.LVL56:
+ 629              		.loc 1 126 22 view .LVU161
+ 630 0024 D3B2     		uxtb	r3, r2
+ 631              	.LVL57:
+ 632              		.loc 1 126 9 view .LVU162
+ 633 0026 03E0     		b	.L52
+ 634              	.L53:
+ 127:Core/Src/UDS.c ****         {
+ 128:Core/Src/UDS.c ****             data[i] = 0x00;
+ 635              		.loc 1 128 13 is_stmt 1 view .LVU163
+ 636              		.loc 1 128 21 is_stmt 0 view .LVU164
+ 637 0028 0022     		movs	r2, #0
+ 638 002a C254     		strb	r2, [r0, r3]
+ 126:Core/Src/UDS.c ****         {
+ 639              		.loc 1 126 43 is_stmt 1 discriminator 3 view .LVU165
+ 640 002c 0133     		adds	r3, r3, #1
+ 641              	.LVL58:
+ 126:Core/Src/UDS.c ****         {
+ 642              		.loc 1 126 43 is_stmt 0 discriminator 3 view .LVU166
+ 643 002e DBB2     		uxtb	r3, r3
+ 644              	.LVL59:
+ 645              	.L52:
+ 126:Core/Src/UDS.c ****         {
+ 646              		.loc 1 126 37 is_stmt 1 discriminator 1 view .LVU167
+ 647 0030 072B     		cmp	r3, #7
+ 648 0032 F9D9     		bls	.L53
+ 126:Core/Src/UDS.c ****         {
+ 649              		.loc 1 126 37 is_stmt 0 discriminator 1 view .LVU168
+ 650              	.LBE7:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 15
+
+
+ 129:Core/Src/UDS.c ****         }
+ 130:Core/Src/UDS.c ****         FormatCANFrame(data);
+ 651              		.loc 1 130 9 is_stmt 1 view .LVU169
+ 652 0034 FFF7FEFF 		bl	FormatCANFrame
+ 653              	.LVL60:
+ 131:Core/Src/UDS.c ****         return;
+ 654              		.loc 1 131 9 view .LVU170
+ 655              	.L48:
+ 132:Core/Src/UDS.c ****     }
+ 133:Core/Src/UDS.c ****     USART3_SendString((uint8_t *)"Invalid Input\n");
+ 134:Core/Src/UDS.c **** }
+ 656              		.loc 1 134 1 is_stmt 0 view .LVU171
+ 657 0038 08BD     		pop	{r3, pc}
+ 658              	.LVL61:
+ 659              	.L49:
+ 133:Core/Src/UDS.c **** }
+ 660              		.loc 1 133 5 is_stmt 1 view .LVU172
+ 661 003a 0248     		ldr	r0, .L56
+ 662              	.LVL62:
+ 133:Core/Src/UDS.c **** }
+ 663              		.loc 1 133 5 is_stmt 0 view .LVU173
+ 664 003c FFF7FEFF 		bl	USART3_SendString
+ 665              	.LVL63:
+ 133:Core/Src/UDS.c **** }
+ 666              		.loc 1 133 5 view .LVU174
+ 667 0040 FAE7     		b	.L48
+ 668              	.L57:
+ 669 0042 00BF     		.align	2
+ 670              	.L56:
+ 671 0044 00000000 		.word	.LC2
+ 672              		.cfi_endproc
+ 673              	.LFE146:
+ 675              		.section	.text.SID22_Practice,"ax",%progbits
+ 676              		.align	1
+ 677              		.global	SID22_Practice
+ 678              		.syntax unified
+ 679              		.thumb
+ 680              		.thumb_func
+ 682              	SID22_Practice:
+ 683              	.LVL64:
+ 684              	.LFB147:
+ 135:Core/Src/UDS.c **** 
+ 136:Core/Src/UDS.c **** void SID22_Practice(uint8_t *data_tx, uint8_t *data_rx)
+ 137:Core/Src/UDS.c **** {
+ 685              		.loc 1 137 1 is_stmt 1 view -0
+ 686              		.cfi_startproc
+ 687              		@ args = 0, pretend = 0, frame = 0
+ 688              		@ frame_needed = 0, uses_anonymous_args = 0
+ 689              		.loc 1 137 1 is_stmt 0 view .LVU176
+ 690 0000 38B5     		push	{r3, r4, r5, lr}
+ 691              		.cfi_def_cfa_offset 16
+ 692              		.cfi_offset 3, -16
+ 693              		.cfi_offset 4, -12
+ 694              		.cfi_offset 5, -8
+ 695              		.cfi_offset 14, -4
+ 696 0002 0446     		mov	r4, r0
+ 697 0004 0D46     		mov	r5, r1
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 16
+
+
+ 138:Core/Src/UDS.c ****     if (checkFormat(data_rx)) // check length returned true
+ 698              		.loc 1 138 5 is_stmt 1 view .LVU177
+ 699              		.loc 1 138 9 is_stmt 0 view .LVU178
+ 700 0006 0846     		mov	r0, r1
+ 701              	.LVL65:
+ 702              		.loc 1 138 9 view .LVU179
+ 703 0008 FFF7FEFF 		bl	checkFormat
+ 704              	.LVL66:
+ 705              		.loc 1 138 8 discriminator 1 view .LVU180
+ 706 000c 48B3     		cbz	r0, .L59
+ 139:Core/Src/UDS.c ****     {
+ 140:Core/Src/UDS.c ****         if (checkDID(data_rx)) // check DID returned true, CAN2 Receive Correct message
+ 707              		.loc 1 140 9 is_stmt 1 view .LVU181
+ 708              		.loc 1 140 13 is_stmt 0 view .LVU182
+ 709 000e 2846     		mov	r0, r5
+ 710 0010 FFF7FEFF 		bl	checkDID
+ 711              	.LVL67:
+ 712              		.loc 1 140 12 discriminator 1 view .LVU183
+ 713 0014 48B9     		cbnz	r0, .L67
+ 141:Core/Src/UDS.c ****         {
+ 142:Core/Src/UDS.c ****             // Case 1 in excel, $22 normal flow
+ 143:Core/Src/UDS.c ****             data_tx[0] = 0x05;
+ 144:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 145:Core/Src/UDS.c ****             data_tx[2] = data_rx[2];
+ 146:Core/Src/UDS.c ****             data_tx[3] = data_rx[3];
+ 147:Core/Src/UDS.c ****             data_tx[4] = 0x00;
+ 148:Core/Src/UDS.c ****             data_tx[5] = 0x78;
+ 149:Core/Src/UDS.c ****             data_tx[6] = 0x00;
+ 150:Core/Src/UDS.c ****             data_tx[7] = 0x00;
+ 151:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 152:Core/Src/UDS.c ****             // Expected Res: 05 62 01 23 00 78 55 55
+ 153:Core/Src/UDS.c ****         }
+ 154:Core/Src/UDS.c ****         // Case 3 in excel, Invalid DID
+ 155:Core/Src/UDS.c ****         else
+ 156:Core/Src/UDS.c ****         {
+ 157:Core/Src/UDS.c ****             data_tx[0] = 0x03;
+ 714              		.loc 1 157 13 is_stmt 1 view .LVU184
+ 715              		.loc 1 157 24 is_stmt 0 view .LVU185
+ 716 0016 0323     		movs	r3, #3
+ 717 0018 2370     		strb	r3, [r4]
+ 158:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 718              		.loc 1 158 13 is_stmt 1 view .LVU186
+ 719              		.loc 1 158 24 is_stmt 0 view .LVU187
+ 720 001a 7F23     		movs	r3, #127
+ 721 001c 6370     		strb	r3, [r4, #1]
+ 159:Core/Src/UDS.c ****             data_tx[2] = 0x22;
+ 722              		.loc 1 159 13 is_stmt 1 view .LVU188
+ 723              		.loc 1 159 24 is_stmt 0 view .LVU189
+ 724 001e 2223     		movs	r3, #34
+ 725 0020 A370     		strb	r3, [r4, #2]
+ 160:Core/Src/UDS.c ****             data_tx[3] = INVALID_DID;
+ 726              		.loc 1 160 13 is_stmt 1 view .LVU190
+ 727              		.loc 1 160 24 is_stmt 0 view .LVU191
+ 728 0022 3123     		movs	r3, #49
+ 729 0024 E370     		strb	r3, [r4, #3]
+ 161:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 730              		.loc 1 161 13 is_stmt 1 view .LVU192
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 17
+
+
+ 731              	.LBB8:
+ 732              		.loc 1 161 18 view .LVU193
+ 733              	.LVL68:
+ 734              		.loc 1 161 22 is_stmt 0 view .LVU194
+ 735 0026 0423     		movs	r3, #4
+ 736              		.loc 1 161 13 view .LVU195
+ 737 0028 15E0     		b	.L62
+ 738              	.LVL69:
+ 739              	.L67:
+ 740              		.loc 1 161 13 view .LVU196
+ 741              	.LBE8:
+ 143:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 742              		.loc 1 143 13 is_stmt 1 view .LVU197
+ 143:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 743              		.loc 1 143 24 is_stmt 0 view .LVU198
+ 744 002a 0523     		movs	r3, #5
+ 745 002c 2370     		strb	r3, [r4]
+ 144:Core/Src/UDS.c ****             data_tx[2] = data_rx[2];
+ 746              		.loc 1 144 13 is_stmt 1 view .LVU199
+ 144:Core/Src/UDS.c ****             data_tx[2] = data_rx[2];
+ 747              		.loc 1 144 33 is_stmt 0 view .LVU200
+ 748 002e 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 144:Core/Src/UDS.c ****             data_tx[2] = data_rx[2];
+ 749              		.loc 1 144 37 view .LVU201
+ 750 0030 4033     		adds	r3, r3, #64
+ 144:Core/Src/UDS.c ****             data_tx[2] = data_rx[2];
+ 751              		.loc 1 144 24 view .LVU202
+ 752 0032 6370     		strb	r3, [r4, #1]
+ 145:Core/Src/UDS.c ****             data_tx[3] = data_rx[3];
+ 753              		.loc 1 145 13 is_stmt 1 view .LVU203
+ 145:Core/Src/UDS.c ****             data_tx[3] = data_rx[3];
+ 754              		.loc 1 145 24 is_stmt 0 view .LVU204
+ 755 0034 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 756 0036 A370     		strb	r3, [r4, #2]
+ 146:Core/Src/UDS.c ****             data_tx[4] = 0x00;
+ 757              		.loc 1 146 13 is_stmt 1 view .LVU205
+ 146:Core/Src/UDS.c ****             data_tx[4] = 0x00;
+ 758              		.loc 1 146 24 is_stmt 0 view .LVU206
+ 759 0038 EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 760 003a E370     		strb	r3, [r4, #3]
+ 147:Core/Src/UDS.c ****             data_tx[5] = 0x78;
+ 761              		.loc 1 147 13 is_stmt 1 view .LVU207
+ 147:Core/Src/UDS.c ****             data_tx[5] = 0x78;
+ 762              		.loc 1 147 24 is_stmt 0 view .LVU208
+ 763 003c 0023     		movs	r3, #0
+ 764 003e 2371     		strb	r3, [r4, #4]
+ 148:Core/Src/UDS.c ****             data_tx[6] = 0x00;
+ 765              		.loc 1 148 13 is_stmt 1 view .LVU209
+ 148:Core/Src/UDS.c ****             data_tx[6] = 0x00;
+ 766              		.loc 1 148 24 is_stmt 0 view .LVU210
+ 767 0040 7822     		movs	r2, #120
+ 768 0042 6271     		strb	r2, [r4, #5]
+ 149:Core/Src/UDS.c ****             data_tx[7] = 0x00;
+ 769              		.loc 1 149 13 is_stmt 1 view .LVU211
+ 149:Core/Src/UDS.c ****             data_tx[7] = 0x00;
+ 770              		.loc 1 149 24 is_stmt 0 view .LVU212
+ 771 0044 A371     		strb	r3, [r4, #6]
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 18
+
+
+ 150:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 772              		.loc 1 150 13 is_stmt 1 view .LVU213
+ 150:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 773              		.loc 1 150 24 is_stmt 0 view .LVU214
+ 774 0046 E371     		strb	r3, [r4, #7]
+ 151:Core/Src/UDS.c ****             // Expected Res: 05 62 01 23 00 78 55 55
+ 775              		.loc 1 151 13 is_stmt 1 view .LVU215
+ 776 0048 2046     		mov	r0, r4
+ 777 004a FFF7FEFF 		bl	FormatCANFrame
+ 778              	.LVL70:
+ 779 004e 1AE0     		b	.L61
+ 780              	.LVL71:
+ 781              	.L63:
+ 782              	.LBB9:
+ 162:Core/Src/UDS.c ****             {
+ 163:Core/Src/UDS.c ****                 data_tx[i] = 0x00;
+ 783              		.loc 1 163 17 view .LVU216
+ 784              		.loc 1 163 28 is_stmt 0 view .LVU217
+ 785 0050 0022     		movs	r2, #0
+ 786 0052 E254     		strb	r2, [r4, r3]
+ 161:Core/Src/UDS.c ****             {
+ 787              		.loc 1 161 37 is_stmt 1 discriminator 3 view .LVU218
+ 788 0054 0133     		adds	r3, r3, #1
+ 789              	.LVL72:
+ 790              	.L62:
+ 161:Core/Src/UDS.c ****             {
+ 791              		.loc 1 161 31 discriminator 1 view .LVU219
+ 792 0056 072B     		cmp	r3, #7
+ 793 0058 FADD     		ble	.L63
+ 794              	.LBE9:
+ 164:Core/Src/UDS.c ****             }
+ 165:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 795              		.loc 1 165 13 view .LVU220
+ 796 005a 2046     		mov	r0, r4
+ 797 005c FFF7FEFF 		bl	FormatCANFrame
+ 798              	.LVL73:
+ 799              		.loc 1 165 13 is_stmt 0 view .LVU221
+ 800 0060 11E0     		b	.L61
+ 801              	.LVL74:
+ 802              	.L59:
+ 166:Core/Src/UDS.c ****             // Expected Res: 03 7F 22 31 55 55 55 55
+ 167:Core/Src/UDS.c ****         }
+ 168:Core/Src/UDS.c ****     }
+ 169:Core/Src/UDS.c ****     // Case 2 in excel, Invalid Length
+ 170:Core/Src/UDS.c ****     else
+ 171:Core/Src/UDS.c ****     {
+ 172:Core/Src/UDS.c ****         data_tx[0] = 0x03;
+ 803              		.loc 1 172 9 is_stmt 1 view .LVU222
+ 804              		.loc 1 172 20 is_stmt 0 view .LVU223
+ 805 0062 0323     		movs	r3, #3
+ 806 0064 2370     		strb	r3, [r4]
+ 173:Core/Src/UDS.c ****         data_tx[1] = NRC;
+ 807              		.loc 1 173 9 is_stmt 1 view .LVU224
+ 808              		.loc 1 173 20 is_stmt 0 view .LVU225
+ 809 0066 7F23     		movs	r3, #127
+ 810 0068 6370     		strb	r3, [r4, #1]
+ 174:Core/Src/UDS.c ****         data_tx[2] = 0x22;
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 19
+
+
+ 811              		.loc 1 174 9 is_stmt 1 view .LVU226
+ 812              		.loc 1 174 20 is_stmt 0 view .LVU227
+ 813 006a 2223     		movs	r3, #34
+ 814 006c A370     		strb	r3, [r4, #2]
+ 175:Core/Src/UDS.c ****         data_tx[3] = INVALID_LENGTH;
+ 815              		.loc 1 175 9 is_stmt 1 view .LVU228
+ 816              		.loc 1 175 20 is_stmt 0 view .LVU229
+ 817 006e 1323     		movs	r3, #19
+ 818 0070 E370     		strb	r3, [r4, #3]
+ 176:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 819              		.loc 1 176 9 is_stmt 1 view .LVU230
+ 820              	.LBB10:
+ 821              		.loc 1 176 14 view .LVU231
+ 822              	.LVL75:
+ 823              		.loc 1 176 18 is_stmt 0 view .LVU232
+ 824 0072 0423     		movs	r3, #4
+ 825              		.loc 1 176 9 view .LVU233
+ 826 0074 02E0     		b	.L64
+ 827              	.LVL76:
+ 828              	.L65:
+ 177:Core/Src/UDS.c ****         {
+ 178:Core/Src/UDS.c ****             data_tx[i] = 0x00;
+ 829              		.loc 1 178 13 is_stmt 1 view .LVU234
+ 830              		.loc 1 178 24 is_stmt 0 view .LVU235
+ 831 0076 0022     		movs	r2, #0
+ 832 0078 E254     		strb	r2, [r4, r3]
+ 176:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 833              		.loc 1 176 33 is_stmt 1 discriminator 3 view .LVU236
+ 834 007a 0133     		adds	r3, r3, #1
+ 835              	.LVL77:
+ 836              	.L64:
+ 176:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 837              		.loc 1 176 27 discriminator 1 view .LVU237
+ 838 007c 072B     		cmp	r3, #7
+ 839 007e FADD     		ble	.L65
+ 840              	.LBE10:
+ 179:Core/Src/UDS.c ****         }
+ 180:Core/Src/UDS.c ****         FormatCANFrame(data_tx);
+ 841              		.loc 1 180 9 view .LVU238
+ 842 0080 2046     		mov	r0, r4
+ 843 0082 FFF7FEFF 		bl	FormatCANFrame
+ 844              	.LVL78:
+ 845              	.L61:
+ 181:Core/Src/UDS.c ****         // Expected Res: 03 7F 22 13 55 55 55 55
+ 182:Core/Src/UDS.c ****     }
+ 183:Core/Src/UDS.c **** 
+ 184:Core/Src/UDS.c ****     HAL_CAN_AddTxMessage(&hcan2, &CAN2_pHeader, data_tx, &CAN2_pTxMailbox);
+ 846              		.loc 1 184 5 view .LVU239
+ 847 0086 034B     		ldr	r3, .L68
+ 848 0088 2246     		mov	r2, r4
+ 849 008a 0349     		ldr	r1, .L68+4
+ 850 008c 0348     		ldr	r0, .L68+8
+ 851 008e FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 852              	.LVL79:
+ 185:Core/Src/UDS.c **** }
+ 853              		.loc 1 185 1 is_stmt 0 view .LVU240
+ 854 0092 38BD     		pop	{r3, r4, r5, pc}
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 20
+
+
+ 855              	.LVL80:
+ 856              	.L69:
+ 857              		.loc 1 185 1 view .LVU241
+ 858              		.align	2
+ 859              	.L68:
+ 860 0094 00000000 		.word	CAN2_pTxMailbox
+ 861 0098 00000000 		.word	CAN2_pHeader
+ 862 009c 00000000 		.word	hcan2
+ 863              		.cfi_endproc
+ 864              	.LFE147:
+ 866              		.section	.rodata.SID27_Practice.str1.4,"aMS",%progbits,1
+ 867              		.align	2
+ 868              	.LC3:
+ 869 0000 53657373 		.ascii	"Session Unlocked\000"
+ 869      696F6E20 
+ 869      556E6C6F 
+ 869      636B6564 
+ 869      00
+ 870              		.section	.text.SID27_Practice,"ax",%progbits
+ 871              		.align	1
+ 872              		.global	SID27_Practice
+ 873              		.syntax unified
+ 874              		.thumb
+ 875              		.thumb_func
+ 877              	SID27_Practice:
+ 878              	.LVL81:
+ 879              	.LFB148:
+ 186:Core/Src/UDS.c **** 
+ 187:Core/Src/UDS.c **** void SID27_Practice(uint8_t *data_tx, uint8_t *data_rx)
+ 188:Core/Src/UDS.c **** {
+ 880              		.loc 1 188 1 is_stmt 1 view -0
+ 881              		.cfi_startproc
+ 882              		@ args = 0, pretend = 0, frame = 0
+ 883              		@ frame_needed = 0, uses_anonymous_args = 0
+ 884              		.loc 1 188 1 is_stmt 0 view .LVU243
+ 885 0000 70B5     		push	{r4, r5, r6, lr}
+ 886              		.cfi_def_cfa_offset 16
+ 887              		.cfi_offset 4, -16
+ 888              		.cfi_offset 5, -12
+ 889              		.cfi_offset 6, -8
+ 890              		.cfi_offset 14, -4
+ 891 0002 0446     		mov	r4, r0
+ 892 0004 0D46     		mov	r5, r1
+ 189:Core/Src/UDS.c ****     HAL_Delay(100);
+ 893              		.loc 1 189 5 is_stmt 1 view .LVU244
+ 894 0006 6420     		movs	r0, #100
+ 895              	.LVL82:
+ 896              		.loc 1 189 5 is_stmt 0 view .LVU245
+ 897 0008 FFF7FEFF 		bl	HAL_Delay
+ 898              	.LVL83:
+ 190:Core/Src/UDS.c ****     switch (data_rx[2])
+ 899              		.loc 1 190 5 is_stmt 1 view .LVU246
+ 900              		.loc 1 190 20 is_stmt 0 view .LVU247
+ 901 000c AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 902              		.loc 1 190 5 view .LVU248
+ 903 000e 012B     		cmp	r3, #1
+ 904 0010 0BD0     		beq	.L71
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 21
+
+
+ 905 0012 022B     		cmp	r3, #2
+ 906 0014 38D0     		beq	.L72
+ 191:Core/Src/UDS.c ****     {
+ 192:Core/Src/UDS.c ****     case 0x01: // Request Seed
+ 193:Core/Src/UDS.c ****         if (data_rx[0] == 0x02)
+ 194:Core/Src/UDS.c ****         {
+ 195:Core/Src/UDS.c ****             data_tx[0] = 0x06;
+ 196:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 197:Core/Src/UDS.c ****             data_tx[2] = 0x01;
+ 198:Core/Src/UDS.c ****             for (int i = 3; i < 7; i++)
+ 199:Core/Src/UDS.c ****             {
+ 200:Core/Src/UDS.c ****                 data_tx[i] = Seed[i - 3];
+ 201:Core/Src/UDS.c ****             }
+ 202:Core/Src/UDS.c ****             data_tx[7] = 0x00;
+ 203:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 204:Core/Src/UDS.c ****             flag_SeedProvided = 1;
+ 205:Core/Src/UDS.c ****             // Expected Res: 06 67 01 55 55 55 55 55
+ 206:Core/Src/UDS.c ****         }
+ 207:Core/Src/UDS.c ****         else
+ 208:Core/Src/UDS.c ****         {
+ 209:Core/Src/UDS.c ****             data_tx[0] = 0x03;
+ 210:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 211:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 212:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 213:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 214:Core/Src/UDS.c ****             {
+ 215:Core/Src/UDS.c ****                 data_tx[i] = 0x00;
+ 216:Core/Src/UDS.c ****             }
+ 217:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 218:Core/Src/UDS.c ****             // Expected Res: 03 7F 27 13 55 55 55 55
+ 219:Core/Src/UDS.c ****         }
+ 220:Core/Src/UDS.c ****         break;
+ 221:Core/Src/UDS.c ****     case 0x02: // Send Key
+ 222:Core/Src/UDS.c ****         if (data_rx[0] == 0x06)
+ 223:Core/Src/UDS.c ****         {
+ 224:Core/Src/UDS.c ****             calculate_key_from_seed(Seed, Key);
+ 225:Core/Src/UDS.c ****             if (cmp_key(Key, &data_rx[3], 4)) // Key match and ECU is not unlocked
+ 226:Core/Src/UDS.c ****             {
+ 227:Core/Src/UDS.c ****                 if (flag_SeedProvided == 1 && flag_SecurityUnlocked == 0)
+ 228:Core/Src/UDS.c ****                 {
+ 229:Core/Src/UDS.c ****                     HAL_TIM_Base_Start_IT(&htim2);
+ 230:Core/Src/UDS.c ****                     flag_SecurityUnlocked = 1;
+ 231:Core/Src/UDS.c ****                     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 232:Core/Src/UDS.c **** 
+ 233:Core/Src/UDS.c ****                     USART3_SendString((uint8_t *)"Session Unlocked");
+ 234:Core/Src/UDS.c **** 
+ 235:Core/Src/UDS.c ****                     data_tx[0] = 0x02;
+ 236:Core/Src/UDS.c ****                     data_tx[1] = data_rx[1] + 0x40;
+ 237:Core/Src/UDS.c ****                     data_tx[2] = 0x02;
+ 238:Core/Src/UDS.c ****                     for (int i = 3; i < 8; ++i)
+ 239:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 240:Core/Src/UDS.c ****                     FormatCANFrame(data_tx);
+ 241:Core/Src/UDS.c **** 
+ 242:Core/Src/UDS.c ****                     flag_SeedProvided = 0;
+ 243:Core/Src/UDS.c ****                 }
+ 244:Core/Src/UDS.c ****                 else // ECU is already unlocked
+ 245:Core/Src/UDS.c ****                     return;
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 22
+
+
+ 246:Core/Src/UDS.c ****             }
+ 247:Core/Src/UDS.c **** 
+ 248:Core/Src/UDS.c ****             else // Key not match
+ 249:Core/Src/UDS.c ****             {
+ 250:Core/Src/UDS.c ****                 data_tx[0] = 0x03;
+ 251:Core/Src/UDS.c ****                 data_tx[1] = NRC;
+ 252:Core/Src/UDS.c ****                 data_tx[2] = 0x27;
+ 253:Core/Src/UDS.c ****                 data_tx[3] = WRONG_KEY;
+ 254:Core/Src/UDS.c ****                 for (int i = 4; i < 8; i++)
+ 255:Core/Src/UDS.c ****                 {
+ 256:Core/Src/UDS.c ****                     data_tx[i] = 0x00;
+ 257:Core/Src/UDS.c ****                 }
+ 258:Core/Src/UDS.c ****                 FormatCANFrame(data_tx);
+ 259:Core/Src/UDS.c ****             }
+ 260:Core/Src/UDS.c ****         }
+ 261:Core/Src/UDS.c ****         if (data_rx[0] != 0x06)
+ 262:Core/Src/UDS.c ****         {
+ 263:Core/Src/UDS.c ****             data_tx[0] = 0x03;
+ 264:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 265:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 266:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 267:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 268:Core/Src/UDS.c ****             {
+ 269:Core/Src/UDS.c ****                 data_tx[i] = 0x00;
+ 270:Core/Src/UDS.c ****             }
+ 271:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 272:Core/Src/UDS.c ****         }
+ 273:Core/Src/UDS.c ****         break;
+ 274:Core/Src/UDS.c **** 
+ 275:Core/Src/UDS.c ****     default:
+ 276:Core/Src/UDS.c ****         if (data_rx[0] != 0x02 || data_rx[0] != 0x06) 
+ 907              		.loc 1 276 9 is_stmt 1 view .LVU249
+ 277:Core/Src/UDS.c ****         {
+ 278:Core/Src/UDS.c ****             data_tx[0] = 0x03;
+ 908              		.loc 1 278 13 view .LVU250
+ 909              		.loc 1 278 24 is_stmt 0 view .LVU251
+ 910 0016 0323     		movs	r3, #3
+ 911 0018 2370     		strb	r3, [r4]
+ 279:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 912              		.loc 1 279 13 is_stmt 1 view .LVU252
+ 913              		.loc 1 279 24 is_stmt 0 view .LVU253
+ 914 001a 7F23     		movs	r3, #127
+ 915 001c 6370     		strb	r3, [r4, #1]
+ 280:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 916              		.loc 1 280 13 is_stmt 1 view .LVU254
+ 917              		.loc 1 280 24 is_stmt 0 view .LVU255
+ 918 001e 2723     		movs	r3, #39
+ 919 0020 A370     		strb	r3, [r4, #2]
+ 281:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 920              		.loc 1 281 13 is_stmt 1 view .LVU256
+ 921              		.loc 1 281 24 is_stmt 0 view .LVU257
+ 922 0022 1323     		movs	r3, #19
+ 923 0024 E370     		strb	r3, [r4, #3]
+ 282:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 924              		.loc 1 282 13 is_stmt 1 view .LVU258
+ 925              	.LBB11:
+ 926              		.loc 1 282 18 view .LVU259
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 23
+
+
+ 927              	.LVL84:
+ 928              		.loc 1 282 22 is_stmt 0 view .LVU260
+ 929 0026 0423     		movs	r3, #4
+ 930              		.loc 1 282 13 view .LVU261
+ 931 0028 91E0     		b	.L89
+ 932              	.LVL85:
+ 933              	.L71:
+ 934              		.loc 1 282 13 view .LVU262
+ 935              	.LBE11:
+ 193:Core/Src/UDS.c ****         {
+ 936              		.loc 1 193 9 is_stmt 1 view .LVU263
+ 193:Core/Src/UDS.c ****         {
+ 937              		.loc 1 193 20 is_stmt 0 view .LVU264
+ 938 002a 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 193:Core/Src/UDS.c ****         {
+ 939              		.loc 1 193 12 view .LVU265
+ 940 002c 022B     		cmp	r3, #2
+ 941 002e 09D0     		beq	.L93
+ 209:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 942              		.loc 1 209 13 is_stmt 1 view .LVU266
+ 209:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 943              		.loc 1 209 24 is_stmt 0 view .LVU267
+ 944 0030 0323     		movs	r3, #3
+ 945 0032 2370     		strb	r3, [r4]
+ 210:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 946              		.loc 1 210 13 is_stmt 1 view .LVU268
+ 210:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 947              		.loc 1 210 24 is_stmt 0 view .LVU269
+ 948 0034 7F23     		movs	r3, #127
+ 949 0036 6370     		strb	r3, [r4, #1]
+ 211:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 950              		.loc 1 211 13 is_stmt 1 view .LVU270
+ 211:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 951              		.loc 1 211 24 is_stmt 0 view .LVU271
+ 952 0038 2723     		movs	r3, #39
+ 953 003a A370     		strb	r3, [r4, #2]
+ 212:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 954              		.loc 1 212 13 is_stmt 1 view .LVU272
+ 212:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 955              		.loc 1 212 24 is_stmt 0 view .LVU273
+ 956 003c 1323     		movs	r3, #19
+ 957 003e E370     		strb	r3, [r4, #3]
+ 213:Core/Src/UDS.c ****             {
+ 958              		.loc 1 213 13 is_stmt 1 view .LVU274
+ 959              	.LBB12:
+ 213:Core/Src/UDS.c ****             {
+ 960              		.loc 1 213 18 view .LVU275
+ 961              	.LVL86:
+ 213:Core/Src/UDS.c ****             {
+ 962              		.loc 1 213 22 is_stmt 0 view .LVU276
+ 963 0040 0423     		movs	r3, #4
+ 213:Core/Src/UDS.c ****             {
+ 964              		.loc 1 213 13 view .LVU277
+ 965 0042 1BE0     		b	.L78
+ 966              	.LVL87:
+ 967              	.L93:
+ 213:Core/Src/UDS.c ****             {
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 24
+
+
+ 968              		.loc 1 213 13 view .LVU278
+ 969              	.LBE12:
+ 195:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 970              		.loc 1 195 13 is_stmt 1 view .LVU279
+ 195:Core/Src/UDS.c ****             data_tx[1] = data_rx[1] + 0x40;
+ 971              		.loc 1 195 24 is_stmt 0 view .LVU280
+ 972 0044 0623     		movs	r3, #6
+ 973 0046 2370     		strb	r3, [r4]
+ 196:Core/Src/UDS.c ****             data_tx[2] = 0x01;
+ 974              		.loc 1 196 13 is_stmt 1 view .LVU281
+ 196:Core/Src/UDS.c ****             data_tx[2] = 0x01;
+ 975              		.loc 1 196 33 is_stmt 0 view .LVU282
+ 976 0048 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 196:Core/Src/UDS.c ****             data_tx[2] = 0x01;
+ 977              		.loc 1 196 37 view .LVU283
+ 978 004a 4033     		adds	r3, r3, #64
+ 196:Core/Src/UDS.c ****             data_tx[2] = 0x01;
+ 979              		.loc 1 196 24 view .LVU284
+ 980 004c 6370     		strb	r3, [r4, #1]
+ 197:Core/Src/UDS.c ****             for (int i = 3; i < 7; i++)
+ 981              		.loc 1 197 13 is_stmt 1 view .LVU285
+ 197:Core/Src/UDS.c ****             for (int i = 3; i < 7; i++)
+ 982              		.loc 1 197 24 is_stmt 0 view .LVU286
+ 983 004e 0123     		movs	r3, #1
+ 984 0050 A370     		strb	r3, [r4, #2]
+ 198:Core/Src/UDS.c ****             {
+ 985              		.loc 1 198 13 is_stmt 1 view .LVU287
+ 986              	.LBB13:
+ 198:Core/Src/UDS.c ****             {
+ 987              		.loc 1 198 18 view .LVU288
+ 988              	.LVL88:
+ 198:Core/Src/UDS.c ****             {
+ 989              		.loc 1 198 22 is_stmt 0 view .LVU289
+ 990 0052 0323     		movs	r3, #3
+ 198:Core/Src/UDS.c ****             {
+ 991              		.loc 1 198 13 view .LVU290
+ 992 0054 04E0     		b	.L75
+ 993              	.LVL89:
+ 994              	.L76:
+ 200:Core/Src/UDS.c ****             }
+ 995              		.loc 1 200 17 is_stmt 1 view .LVU291
+ 200:Core/Src/UDS.c ****             }
+ 996              		.loc 1 200 37 is_stmt 0 view .LVU292
+ 997 0056 DA1E     		subs	r2, r3, #3
+ 200:Core/Src/UDS.c ****             }
+ 998              		.loc 1 200 34 view .LVU293
+ 999 0058 4449     		ldr	r1, .L95
+ 1000 005a 8A5C     		ldrb	r2, [r1, r2]	@ zero_extendqisi2
+ 200:Core/Src/UDS.c ****             }
+ 1001              		.loc 1 200 28 view .LVU294
+ 1002 005c E254     		strb	r2, [r4, r3]
+ 198:Core/Src/UDS.c ****             {
+ 1003              		.loc 1 198 37 is_stmt 1 discriminator 3 view .LVU295
+ 1004 005e 0133     		adds	r3, r3, #1
+ 1005              	.LVL90:
+ 1006              	.L75:
+ 198:Core/Src/UDS.c ****             {
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 25
+
+
+ 1007              		.loc 1 198 31 discriminator 1 view .LVU296
+ 1008 0060 062B     		cmp	r3, #6
+ 1009 0062 F8DD     		ble	.L76
+ 1010              	.LBE13:
+ 202:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 1011              		.loc 1 202 13 view .LVU297
+ 202:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 1012              		.loc 1 202 24 is_stmt 0 view .LVU298
+ 1013 0064 0023     		movs	r3, #0
+ 1014              	.LVL91:
+ 202:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 1015              		.loc 1 202 24 view .LVU299
+ 1016 0066 E371     		strb	r3, [r4, #7]
+ 203:Core/Src/UDS.c ****             flag_SeedProvided = 1;
+ 1017              		.loc 1 203 13 is_stmt 1 view .LVU300
+ 1018 0068 2046     		mov	r0, r4
+ 1019 006a FFF7FEFF 		bl	FormatCANFrame
+ 1020              	.LVL92:
+ 204:Core/Src/UDS.c ****             // Expected Res: 06 67 01 55 55 55 55 55
+ 1021              		.loc 1 204 13 view .LVU301
+ 204:Core/Src/UDS.c ****             // Expected Res: 06 67 01 55 55 55 55 55
+ 1022              		.loc 1 204 31 is_stmt 0 view .LVU302
+ 1023 006e 404B     		ldr	r3, .L95+4
+ 1024 0070 0122     		movs	r2, #1
+ 1025 0072 1A70     		strb	r2, [r3]
+ 1026 0074 70E0     		b	.L77
+ 1027              	.LVL93:
+ 1028              	.L79:
+ 1029              	.LBB14:
+ 215:Core/Src/UDS.c ****             }
+ 1030              		.loc 1 215 17 is_stmt 1 view .LVU303
+ 215:Core/Src/UDS.c ****             }
+ 1031              		.loc 1 215 28 is_stmt 0 view .LVU304
+ 1032 0076 0022     		movs	r2, #0
+ 1033 0078 E254     		strb	r2, [r4, r3]
+ 213:Core/Src/UDS.c ****             {
+ 1034              		.loc 1 213 37 is_stmt 1 discriminator 3 view .LVU305
+ 1035 007a 0133     		adds	r3, r3, #1
+ 1036              	.LVL94:
+ 1037              	.L78:
+ 213:Core/Src/UDS.c ****             {
+ 1038              		.loc 1 213 31 discriminator 1 view .LVU306
+ 1039 007c 072B     		cmp	r3, #7
+ 1040 007e FADD     		ble	.L79
+ 1041              	.LBE14:
+ 217:Core/Src/UDS.c ****             // Expected Res: 03 7F 27 13 55 55 55 55
+ 1042              		.loc 1 217 13 view .LVU307
+ 1043 0080 2046     		mov	r0, r4
+ 1044 0082 FFF7FEFF 		bl	FormatCANFrame
+ 1045              	.LVL95:
+ 217:Core/Src/UDS.c ****             // Expected Res: 03 7F 27 13 55 55 55 55
+ 1046              		.loc 1 217 13 is_stmt 0 view .LVU308
+ 1047 0086 67E0     		b	.L77
+ 1048              	.LVL96:
+ 1049              	.L72:
+ 222:Core/Src/UDS.c ****         {
+ 1050              		.loc 1 222 9 is_stmt 1 view .LVU309
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 26
+
+
+ 222:Core/Src/UDS.c ****         {
+ 1051              		.loc 1 222 20 is_stmt 0 view .LVU310
+ 1052 0088 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 222:Core/Src/UDS.c ****         {
+ 1053              		.loc 1 222 12 view .LVU311
+ 1054 008a 062B     		cmp	r3, #6
+ 1055 008c 0CD0     		beq	.L94
+ 1056              	.L80:
+ 261:Core/Src/UDS.c ****         {
+ 1057              		.loc 1 261 9 is_stmt 1 view .LVU312
+ 261:Core/Src/UDS.c ****         {
+ 1058              		.loc 1 261 20 is_stmt 0 view .LVU313
+ 1059 008e 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 261:Core/Src/UDS.c ****         {
+ 1060              		.loc 1 261 12 view .LVU314
+ 1061 0090 062B     		cmp	r3, #6
+ 1062 0092 61D0     		beq	.L77
+ 263:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 1063              		.loc 1 263 13 is_stmt 1 view .LVU315
+ 263:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 1064              		.loc 1 263 24 is_stmt 0 view .LVU316
+ 1065 0094 0323     		movs	r3, #3
+ 1066 0096 2370     		strb	r3, [r4]
+ 264:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 1067              		.loc 1 264 13 is_stmt 1 view .LVU317
+ 264:Core/Src/UDS.c ****             data_tx[2] = 0x27;
+ 1068              		.loc 1 264 24 is_stmt 0 view .LVU318
+ 1069 0098 7F23     		movs	r3, #127
+ 1070 009a 6370     		strb	r3, [r4, #1]
+ 265:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 1071              		.loc 1 265 13 is_stmt 1 view .LVU319
+ 265:Core/Src/UDS.c ****             data_tx[3] = INVALID_LENGTH;
+ 1072              		.loc 1 265 24 is_stmt 0 view .LVU320
+ 1073 009c 2723     		movs	r3, #39
+ 1074 009e A370     		strb	r3, [r4, #2]
+ 266:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1075              		.loc 1 266 13 is_stmt 1 view .LVU321
+ 266:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1076              		.loc 1 266 24 is_stmt 0 view .LVU322
+ 1077 00a0 1323     		movs	r3, #19
+ 1078 00a2 E370     		strb	r3, [r4, #3]
+ 267:Core/Src/UDS.c ****             {
+ 1079              		.loc 1 267 13 is_stmt 1 view .LVU323
+ 1080              	.LBB15:
+ 267:Core/Src/UDS.c ****             {
+ 1081              		.loc 1 267 18 view .LVU324
+ 1082              	.LVL97:
+ 267:Core/Src/UDS.c ****             {
+ 1083              		.loc 1 267 22 is_stmt 0 view .LVU325
+ 1084 00a4 0423     		movs	r3, #4
+ 267:Core/Src/UDS.c ****             {
+ 1085              		.loc 1 267 13 view .LVU326
+ 1086 00a6 49E0     		b	.L87
+ 1087              	.LVL98:
+ 1088              	.L94:
+ 267:Core/Src/UDS.c ****             {
+ 1089              		.loc 1 267 13 view .LVU327
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 27
+
+
+ 1090              	.LBE15:
+ 224:Core/Src/UDS.c ****             if (cmp_key(Key, &data_rx[3], 4)) // Key match and ECU is not unlocked
+ 1091              		.loc 1 224 13 is_stmt 1 view .LVU328
+ 1092 00a8 324E     		ldr	r6, .L95+8
+ 1093 00aa 3146     		mov	r1, r6
+ 1094 00ac 2F48     		ldr	r0, .L95
+ 1095 00ae FFF7FEFF 		bl	calculate_key_from_seed
+ 1096              	.LVL99:
+ 225:Core/Src/UDS.c ****             {
+ 1097              		.loc 1 225 13 view .LVU329
+ 225:Core/Src/UDS.c ****             {
+ 1098              		.loc 1 225 17 is_stmt 0 view .LVU330
+ 1099 00b2 0422     		movs	r2, #4
+ 1100 00b4 E91C     		adds	r1, r5, #3
+ 1101 00b6 3046     		mov	r0, r6
+ 1102 00b8 FFF7FEFF 		bl	cmp_key
+ 1103              	.LVL100:
+ 225:Core/Src/UDS.c ****             {
+ 1104              		.loc 1 225 16 discriminator 1 view .LVU331
+ 1105 00bc 40B3     		cbz	r0, .L81
+ 227:Core/Src/UDS.c ****                 {
+ 1106              		.loc 1 227 17 is_stmt 1 view .LVU332
+ 227:Core/Src/UDS.c ****                 {
+ 1107              		.loc 1 227 39 is_stmt 0 view .LVU333
+ 1108 00be 2C4B     		ldr	r3, .L95+4
+ 1109 00c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 227:Core/Src/UDS.c ****                 {
+ 1110              		.loc 1 227 20 view .LVU334
+ 1111 00c2 012B     		cmp	r3, #1
+ 1112 00c4 51D1     		bne	.L70
+ 227:Core/Src/UDS.c ****                 {
+ 1113              		.loc 1 227 69 discriminator 1 view .LVU335
+ 1114 00c6 2C4B     		ldr	r3, .L95+12
+ 1115 00c8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 227:Core/Src/UDS.c ****                 {
+ 1116              		.loc 1 227 44 discriminator 1 view .LVU336
+ 1117 00ca 002B     		cmp	r3, #0
+ 1118 00cc 4DD1     		bne	.L70
+ 229:Core/Src/UDS.c ****                     flag_SecurityUnlocked = 1;
+ 1119              		.loc 1 229 21 is_stmt 1 view .LVU337
+ 1120 00ce 2B48     		ldr	r0, .L95+16
+ 1121 00d0 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 1122              	.LVL101:
+ 230:Core/Src/UDS.c ****                     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 1123              		.loc 1 230 21 view .LVU338
+ 230:Core/Src/UDS.c ****                     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+ 1124              		.loc 1 230 43 is_stmt 0 view .LVU339
+ 1125 00d4 0121     		movs	r1, #1
+ 1126 00d6 284B     		ldr	r3, .L95+12
+ 1127 00d8 1970     		strb	r1, [r3]
+ 231:Core/Src/UDS.c **** 
+ 1128              		.loc 1 231 21 is_stmt 1 view .LVU340
+ 1129 00da 0A46     		mov	r2, r1
+ 1130 00dc 2848     		ldr	r0, .L95+20
+ 1131 00de FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1132              	.LVL102:
+ 233:Core/Src/UDS.c **** 
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 28
+
+
+ 1133              		.loc 1 233 21 view .LVU341
+ 1134 00e2 2848     		ldr	r0, .L95+24
+ 1135 00e4 FFF7FEFF 		bl	USART3_SendString
+ 1136              	.LVL103:
+ 235:Core/Src/UDS.c ****                     data_tx[1] = data_rx[1] + 0x40;
+ 1137              		.loc 1 235 21 view .LVU342
+ 235:Core/Src/UDS.c ****                     data_tx[1] = data_rx[1] + 0x40;
+ 1138              		.loc 1 235 32 is_stmt 0 view .LVU343
+ 1139 00e8 0222     		movs	r2, #2
+ 1140 00ea 2270     		strb	r2, [r4]
+ 236:Core/Src/UDS.c ****                     data_tx[2] = 0x02;
+ 1141              		.loc 1 236 21 is_stmt 1 view .LVU344
+ 236:Core/Src/UDS.c ****                     data_tx[2] = 0x02;
+ 1142              		.loc 1 236 41 is_stmt 0 view .LVU345
+ 1143 00ec 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 236:Core/Src/UDS.c ****                     data_tx[2] = 0x02;
+ 1144              		.loc 1 236 45 view .LVU346
+ 1145 00ee 4033     		adds	r3, r3, #64
+ 236:Core/Src/UDS.c ****                     data_tx[2] = 0x02;
+ 1146              		.loc 1 236 32 view .LVU347
+ 1147 00f0 6370     		strb	r3, [r4, #1]
+ 237:Core/Src/UDS.c ****                     for (int i = 3; i < 8; ++i)
+ 1148              		.loc 1 237 21 is_stmt 1 view .LVU348
+ 237:Core/Src/UDS.c ****                     for (int i = 3; i < 8; ++i)
+ 1149              		.loc 1 237 32 is_stmt 0 view .LVU349
+ 1150 00f2 A270     		strb	r2, [r4, #2]
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1151              		.loc 1 238 21 is_stmt 1 view .LVU350
+ 1152              	.LBB16:
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1153              		.loc 1 238 26 view .LVU351
+ 1154              	.LVL104:
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1155              		.loc 1 238 30 is_stmt 0 view .LVU352
+ 1156 00f4 0323     		movs	r3, #3
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1157              		.loc 1 238 21 view .LVU353
+ 1158 00f6 02E0     		b	.L83
+ 1159              	.LVL105:
+ 1160              	.L84:
+ 239:Core/Src/UDS.c ****                     FormatCANFrame(data_tx);
+ 1161              		.loc 1 239 25 is_stmt 1 view .LVU354
+ 239:Core/Src/UDS.c ****                     FormatCANFrame(data_tx);
+ 1162              		.loc 1 239 36 is_stmt 0 view .LVU355
+ 1163 00f8 0022     		movs	r2, #0
+ 1164 00fa E254     		strb	r2, [r4, r3]
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1165              		.loc 1 238 44 is_stmt 1 discriminator 3 view .LVU356
+ 1166 00fc 0133     		adds	r3, r3, #1
+ 1167              	.LVL106:
+ 1168              	.L83:
+ 238:Core/Src/UDS.c ****                         data_tx[i] = 0x00;
+ 1169              		.loc 1 238 39 discriminator 1 view .LVU357
+ 1170 00fe 072B     		cmp	r3, #7
+ 1171 0100 FADD     		ble	.L84
+ 1172              	.LBE16:
+ 240:Core/Src/UDS.c **** 
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 29
+
+
+ 1173              		.loc 1 240 21 view .LVU358
+ 1174 0102 2046     		mov	r0, r4
+ 1175 0104 FFF7FEFF 		bl	FormatCANFrame
+ 1176              	.LVL107:
+ 242:Core/Src/UDS.c ****                 }
+ 1177              		.loc 1 242 21 view .LVU359
+ 242:Core/Src/UDS.c ****                 }
+ 1178              		.loc 1 242 39 is_stmt 0 view .LVU360
+ 1179 0108 194B     		ldr	r3, .L95+4
+ 1180 010a 0022     		movs	r2, #0
+ 1181 010c 1A70     		strb	r2, [r3]
+ 1182 010e BEE7     		b	.L80
+ 1183              	.LVL108:
+ 1184              	.L81:
+ 250:Core/Src/UDS.c ****                 data_tx[1] = NRC;
+ 1185              		.loc 1 250 17 is_stmt 1 view .LVU361
+ 250:Core/Src/UDS.c ****                 data_tx[1] = NRC;
+ 1186              		.loc 1 250 28 is_stmt 0 view .LVU362
+ 1187 0110 0323     		movs	r3, #3
+ 1188 0112 2370     		strb	r3, [r4]
+ 251:Core/Src/UDS.c ****                 data_tx[2] = 0x27;
+ 1189              		.loc 1 251 17 is_stmt 1 view .LVU363
+ 251:Core/Src/UDS.c ****                 data_tx[2] = 0x27;
+ 1190              		.loc 1 251 28 is_stmt 0 view .LVU364
+ 1191 0114 7F23     		movs	r3, #127
+ 1192 0116 6370     		strb	r3, [r4, #1]
+ 252:Core/Src/UDS.c ****                 data_tx[3] = WRONG_KEY;
+ 1193              		.loc 1 252 17 is_stmt 1 view .LVU365
+ 252:Core/Src/UDS.c ****                 data_tx[3] = WRONG_KEY;
+ 1194              		.loc 1 252 28 is_stmt 0 view .LVU366
+ 1195 0118 2723     		movs	r3, #39
+ 1196 011a A370     		strb	r3, [r4, #2]
+ 253:Core/Src/UDS.c ****                 for (int i = 4; i < 8; i++)
+ 1197              		.loc 1 253 17 is_stmt 1 view .LVU367
+ 253:Core/Src/UDS.c ****                 for (int i = 4; i < 8; i++)
+ 1198              		.loc 1 253 28 is_stmt 0 view .LVU368
+ 1199 011c 3523     		movs	r3, #53
+ 1200 011e E370     		strb	r3, [r4, #3]
+ 254:Core/Src/UDS.c ****                 {
+ 1201              		.loc 1 254 17 is_stmt 1 view .LVU369
+ 1202              	.LBB17:
+ 254:Core/Src/UDS.c ****                 {
+ 1203              		.loc 1 254 22 view .LVU370
+ 1204              	.LVL109:
+ 254:Core/Src/UDS.c ****                 {
+ 1205              		.loc 1 254 26 is_stmt 0 view .LVU371
+ 1206 0120 0423     		movs	r3, #4
+ 254:Core/Src/UDS.c ****                 {
+ 1207              		.loc 1 254 17 view .LVU372
+ 1208 0122 02E0     		b	.L85
+ 1209              	.LVL110:
+ 1210              	.L86:
+ 256:Core/Src/UDS.c ****                 }
+ 1211              		.loc 1 256 21 is_stmt 1 view .LVU373
+ 256:Core/Src/UDS.c ****                 }
+ 1212              		.loc 1 256 32 is_stmt 0 view .LVU374
+ 1213 0124 0022     		movs	r2, #0
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 30
+
+
+ 1214 0126 E254     		strb	r2, [r4, r3]
+ 254:Core/Src/UDS.c ****                 {
+ 1215              		.loc 1 254 41 is_stmt 1 discriminator 3 view .LVU375
+ 1216 0128 0133     		adds	r3, r3, #1
+ 1217              	.LVL111:
+ 1218              	.L85:
+ 254:Core/Src/UDS.c ****                 {
+ 1219              		.loc 1 254 35 discriminator 1 view .LVU376
+ 1220 012a 072B     		cmp	r3, #7
+ 1221 012c FADD     		ble	.L86
+ 1222              	.LBE17:
+ 258:Core/Src/UDS.c ****             }
+ 1223              		.loc 1 258 17 view .LVU377
+ 1224 012e 2046     		mov	r0, r4
+ 1225 0130 FFF7FEFF 		bl	FormatCANFrame
+ 1226              	.LVL112:
+ 258:Core/Src/UDS.c ****             }
+ 1227              		.loc 1 258 17 is_stmt 0 view .LVU378
+ 1228 0134 ABE7     		b	.L80
+ 1229              	.LVL113:
+ 1230              	.L88:
+ 1231              	.LBB18:
+ 269:Core/Src/UDS.c ****             }
+ 1232              		.loc 1 269 17 is_stmt 1 view .LVU379
+ 269:Core/Src/UDS.c ****             }
+ 1233              		.loc 1 269 28 is_stmt 0 view .LVU380
+ 1234 0136 0022     		movs	r2, #0
+ 1235 0138 E254     		strb	r2, [r4, r3]
+ 267:Core/Src/UDS.c ****             {
+ 1236              		.loc 1 267 37 is_stmt 1 discriminator 3 view .LVU381
+ 1237 013a 0133     		adds	r3, r3, #1
+ 1238              	.LVL114:
+ 1239              	.L87:
+ 267:Core/Src/UDS.c ****             {
+ 1240              		.loc 1 267 31 discriminator 1 view .LVU382
+ 1241 013c 072B     		cmp	r3, #7
+ 1242 013e FADD     		ble	.L88
+ 1243              	.LBE18:
+ 271:Core/Src/UDS.c ****         }
+ 1244              		.loc 1 271 13 view .LVU383
+ 1245 0140 2046     		mov	r0, r4
+ 1246 0142 FFF7FEFF 		bl	FormatCANFrame
+ 1247              	.LVL115:
+ 271:Core/Src/UDS.c ****         }
+ 1248              		.loc 1 271 13 is_stmt 0 view .LVU384
+ 1249 0146 07E0     		b	.L77
+ 1250              	.LVL116:
+ 1251              	.L90:
+ 1252              	.LBB19:
+ 283:Core/Src/UDS.c ****             {
+ 284:Core/Src/UDS.c ****                 data_tx[i] = 0x00;
+ 1253              		.loc 1 284 17 is_stmt 1 view .LVU385
+ 1254              		.loc 1 284 28 is_stmt 0 view .LVU386
+ 1255 0148 0022     		movs	r2, #0
+ 1256 014a E254     		strb	r2, [r4, r3]
+ 282:Core/Src/UDS.c ****             {
+ 1257              		.loc 1 282 37 is_stmt 1 discriminator 3 view .LVU387
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 31
+
+
+ 1258 014c 0133     		adds	r3, r3, #1
+ 1259              	.LVL117:
+ 1260              	.L89:
+ 282:Core/Src/UDS.c ****             {
+ 1261              		.loc 1 282 31 discriminator 1 view .LVU388
+ 1262 014e 072B     		cmp	r3, #7
+ 1263 0150 FADD     		ble	.L90
+ 1264              	.LBE19:
+ 285:Core/Src/UDS.c ****             }
+ 286:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 1265              		.loc 1 286 13 view .LVU389
+ 1266 0152 2046     		mov	r0, r4
+ 1267 0154 FFF7FEFF 		bl	FormatCANFrame
+ 1268              	.LVL118:
+ 287:Core/Src/UDS.c ****         }
+ 288:Core/Src/UDS.c ****         
+ 289:Core/Src/UDS.c ****         break;
+ 1269              		.loc 1 289 9 view .LVU390
+ 1270              	.L77:
+ 290:Core/Src/UDS.c ****     }
+ 291:Core/Src/UDS.c ****     HAL_CAN_AddTxMessage(&hcan2, &CAN2_pHeader, data_tx, &CAN2_pTxMailbox);
+ 1271              		.loc 1 291 5 view .LVU391
+ 1272 0158 0B4B     		ldr	r3, .L95+28
+ 1273 015a 2246     		mov	r2, r4
+ 1274 015c 0B49     		ldr	r1, .L95+32
+ 1275 015e 0C48     		ldr	r0, .L95+36
+ 1276 0160 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1277              	.LVL119:
+ 292:Core/Src/UDS.c ****     HAL_Delay(100);
+ 1278              		.loc 1 292 5 view .LVU392
+ 1279 0164 6420     		movs	r0, #100
+ 1280 0166 FFF7FEFF 		bl	HAL_Delay
+ 1281              	.LVL120:
+ 1282              	.L70:
+ 293:Core/Src/UDS.c **** }
+ 1283              		.loc 1 293 1 is_stmt 0 view .LVU393
+ 1284 016a 70BD     		pop	{r4, r5, r6, pc}
+ 1285              	.LVL121:
+ 1286              	.L96:
+ 1287              		.loc 1 293 1 view .LVU394
+ 1288              		.align	2
+ 1289              	.L95:
+ 1290 016c 00000000 		.word	Seed
+ 1291 0170 00000000 		.word	flag_SeedProvided
+ 1292 0174 00000000 		.word	Key
+ 1293 0178 00000000 		.word	flag_SecurityUnlocked
+ 1294 017c 00000000 		.word	htim2
+ 1295 0180 00040240 		.word	1073873920
+ 1296 0184 00000000 		.word	.LC3
+ 1297 0188 00000000 		.word	CAN2_pTxMailbox
+ 1298 018c 00000000 		.word	CAN2_pHeader
+ 1299 0190 00000000 		.word	hcan2
+ 1300              		.cfi_endproc
+ 1301              	.LFE148:
+ 1303              		.section	.text.SID2E_Practice,"ax",%progbits
+ 1304              		.align	1
+ 1305              		.global	SID2E_Practice
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 32
+
+
+ 1306              		.syntax unified
+ 1307              		.thumb
+ 1308              		.thumb_func
+ 1310              	SID2E_Practice:
+ 1311              	.LVL122:
+ 1312              	.LFB149:
+ 294:Core/Src/UDS.c **** 
+ 295:Core/Src/UDS.c **** void SID2E_Practice(uint8_t *data_tx, uint8_t *data_rx)
+ 296:Core/Src/UDS.c **** {
+ 1313              		.loc 1 296 1 is_stmt 1 view -0
+ 1314              		.cfi_startproc
+ 1315              		@ args = 0, pretend = 0, frame = 0
+ 1316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1317              		.loc 1 296 1 is_stmt 0 view .LVU396
+ 1318 0000 38B5     		push	{r3, r4, r5, lr}
+ 1319              		.cfi_def_cfa_offset 16
+ 1320              		.cfi_offset 3, -16
+ 1321              		.cfi_offset 4, -12
+ 1322              		.cfi_offset 5, -8
+ 1323              		.cfi_offset 14, -4
+ 1324 0002 0446     		mov	r4, r0
+ 1325 0004 0D46     		mov	r5, r1
+ 297:Core/Src/UDS.c ****     HAL_Delay(100);
+ 1326              		.loc 1 297 5 is_stmt 1 view .LVU397
+ 1327 0006 6420     		movs	r0, #100
+ 1328              	.LVL123:
+ 1329              		.loc 1 297 5 is_stmt 0 view .LVU398
+ 1330 0008 FFF7FEFF 		bl	HAL_Delay
+ 1331              	.LVL124:
+ 298:Core/Src/UDS.c ****     if (checkFormat(data_rx))
+ 1332              		.loc 1 298 5 is_stmt 1 view .LVU399
+ 1333              		.loc 1 298 9 is_stmt 0 view .LVU400
+ 1334 000c 2846     		mov	r0, r5
+ 1335 000e FFF7FEFF 		bl	checkFormat
+ 1336              	.LVL125:
+ 1337              		.loc 1 298 8 discriminator 1 view .LVU401
+ 1338 0012 0028     		cmp	r0, #0
+ 1339 0014 3FD0     		beq	.L98
+ 299:Core/Src/UDS.c ****     {
+ 300:Core/Src/UDS.c ****         if (checkDID(data_rx))
+ 1340              		.loc 1 300 9 is_stmt 1 view .LVU402
+ 1341              		.loc 1 300 13 is_stmt 0 view .LVU403
+ 1342 0016 2846     		mov	r0, r5
+ 1343 0018 FFF7FEFF 		bl	checkDID
+ 1344              	.LVL126:
+ 1345              		.loc 1 300 12 discriminator 1 view .LVU404
+ 1346 001c 40B3     		cbz	r0, .L99
+ 301:Core/Src/UDS.c ****         {
+ 302:Core/Src/UDS.c ****             if (flag_SecurityUnlocked == 1) // Normal Flow
+ 1347              		.loc 1 302 13 is_stmt 1 view .LVU405
+ 1348              		.loc 1 302 39 is_stmt 0 view .LVU406
+ 1349 001e 304B     		ldr	r3, .L111
+ 1350 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1351              		.loc 1 302 16 view .LVU407
+ 1352 0022 012B     		cmp	r3, #1
+ 1353 0024 09D0     		beq	.L109
+ 303:Core/Src/UDS.c ****             {
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 33
+
+
+ 304:Core/Src/UDS.c ****                 data_tx[0] = 0x03;
+ 305:Core/Src/UDS.c ****                 data_tx[1] = data_rx[1] + 0x40;
+ 306:Core/Src/UDS.c ****                 data_tx[2] = data_rx[2];
+ 307:Core/Src/UDS.c ****                 data_tx[3] = data_rx[3];
+ 308:Core/Src/UDS.c ****                 data_tx[4] = 0x00;
+ 309:Core/Src/UDS.c ****                 data_tx[5] = 0x00;
+ 310:Core/Src/UDS.c ****                 data_tx[6] = 0x00;
+ 311:Core/Src/UDS.c ****                 data_tx[7] = 0x00;
+ 312:Core/Src/UDS.c ****                 FormatCANFrame(data_tx);
+ 313:Core/Src/UDS.c ****                 // Expected Res: 03 6E 01 23 55 55 55 55
+ 314:Core/Src/UDS.c ****             }
+ 315:Core/Src/UDS.c ****             else // Access Denied because ECU is locked
+ 316:Core/Src/UDS.c ****             {
+ 317:Core/Src/UDS.c ****                 data_tx[0] = 0x03;
+ 1354              		.loc 1 317 17 is_stmt 1 view .LVU408
+ 1355              		.loc 1 317 28 is_stmt 0 view .LVU409
+ 1356 0026 0323     		movs	r3, #3
+ 1357 0028 2370     		strb	r3, [r4]
+ 318:Core/Src/UDS.c ****                 data_tx[1] = NRC;
+ 1358              		.loc 1 318 17 is_stmt 1 view .LVU410
+ 1359              		.loc 1 318 28 is_stmt 0 view .LVU411
+ 1360 002a 7F23     		movs	r3, #127
+ 1361 002c 6370     		strb	r3, [r4, #1]
+ 319:Core/Src/UDS.c ****                 data_tx[2] = 0x2E;
+ 1362              		.loc 1 319 17 is_stmt 1 view .LVU412
+ 1363              		.loc 1 319 28 is_stmt 0 view .LVU413
+ 1364 002e 2E23     		movs	r3, #46
+ 1365 0030 A370     		strb	r3, [r4, #2]
+ 320:Core/Src/UDS.c ****                 data_tx[3] = ACCESS_DENIED;
+ 1366              		.loc 1 320 17 is_stmt 1 view .LVU414
+ 1367              		.loc 1 320 28 is_stmt 0 view .LVU415
+ 1368 0032 3323     		movs	r3, #51
+ 1369 0034 E370     		strb	r3, [r4, #3]
+ 321:Core/Src/UDS.c ****                 for (int i = 4; i < 8; i++)
+ 1370              		.loc 1 321 17 is_stmt 1 view .LVU416
+ 1371              	.LBB20:
+ 1372              		.loc 1 321 22 view .LVU417
+ 1373              	.LVL127:
+ 1374              		.loc 1 321 26 is_stmt 0 view .LVU418
+ 1375 0036 0423     		movs	r3, #4
+ 1376              		.loc 1 321 17 view .LVU419
+ 1377 0038 14E0     		b	.L102
+ 1378              	.LVL128:
+ 1379              	.L109:
+ 1380              		.loc 1 321 17 view .LVU420
+ 1381              	.LBE20:
+ 304:Core/Src/UDS.c ****                 data_tx[1] = data_rx[1] + 0x40;
+ 1382              		.loc 1 304 17 is_stmt 1 view .LVU421
+ 304:Core/Src/UDS.c ****                 data_tx[1] = data_rx[1] + 0x40;
+ 1383              		.loc 1 304 28 is_stmt 0 view .LVU422
+ 1384 003a 0323     		movs	r3, #3
+ 1385 003c 2370     		strb	r3, [r4]
+ 305:Core/Src/UDS.c ****                 data_tx[2] = data_rx[2];
+ 1386              		.loc 1 305 17 is_stmt 1 view .LVU423
+ 305:Core/Src/UDS.c ****                 data_tx[2] = data_rx[2];
+ 1387              		.loc 1 305 37 is_stmt 0 view .LVU424
+ 1388 003e 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 34
+
+
+ 305:Core/Src/UDS.c ****                 data_tx[2] = data_rx[2];
+ 1389              		.loc 1 305 41 view .LVU425
+ 1390 0040 4033     		adds	r3, r3, #64
+ 305:Core/Src/UDS.c ****                 data_tx[2] = data_rx[2];
+ 1391              		.loc 1 305 28 view .LVU426
+ 1392 0042 6370     		strb	r3, [r4, #1]
+ 306:Core/Src/UDS.c ****                 data_tx[3] = data_rx[3];
+ 1393              		.loc 1 306 17 is_stmt 1 view .LVU427
+ 306:Core/Src/UDS.c ****                 data_tx[3] = data_rx[3];
+ 1394              		.loc 1 306 28 is_stmt 0 view .LVU428
+ 1395 0044 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 1396 0046 A370     		strb	r3, [r4, #2]
+ 307:Core/Src/UDS.c ****                 data_tx[4] = 0x00;
+ 1397              		.loc 1 307 17 is_stmt 1 view .LVU429
+ 307:Core/Src/UDS.c ****                 data_tx[4] = 0x00;
+ 1398              		.loc 1 307 28 is_stmt 0 view .LVU430
+ 1399 0048 EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 1400 004a E370     		strb	r3, [r4, #3]
+ 308:Core/Src/UDS.c ****                 data_tx[5] = 0x00;
+ 1401              		.loc 1 308 17 is_stmt 1 view .LVU431
+ 308:Core/Src/UDS.c ****                 data_tx[5] = 0x00;
+ 1402              		.loc 1 308 28 is_stmt 0 view .LVU432
+ 1403 004c 0023     		movs	r3, #0
+ 1404 004e 2371     		strb	r3, [r4, #4]
+ 309:Core/Src/UDS.c ****                 data_tx[6] = 0x00;
+ 1405              		.loc 1 309 17 is_stmt 1 view .LVU433
+ 309:Core/Src/UDS.c ****                 data_tx[6] = 0x00;
+ 1406              		.loc 1 309 28 is_stmt 0 view .LVU434
+ 1407 0050 6371     		strb	r3, [r4, #5]
+ 310:Core/Src/UDS.c ****                 data_tx[7] = 0x00;
+ 1408              		.loc 1 310 17 is_stmt 1 view .LVU435
+ 310:Core/Src/UDS.c ****                 data_tx[7] = 0x00;
+ 1409              		.loc 1 310 28 is_stmt 0 view .LVU436
+ 1410 0052 A371     		strb	r3, [r4, #6]
+ 311:Core/Src/UDS.c ****                 FormatCANFrame(data_tx);
+ 1411              		.loc 1 311 17 is_stmt 1 view .LVU437
+ 311:Core/Src/UDS.c ****                 FormatCANFrame(data_tx);
+ 1412              		.loc 1 311 28 is_stmt 0 view .LVU438
+ 1413 0054 E371     		strb	r3, [r4, #7]
+ 312:Core/Src/UDS.c ****                 // Expected Res: 03 6E 01 23 55 55 55 55
+ 1414              		.loc 1 312 17 is_stmt 1 view .LVU439
+ 1415 0056 2046     		mov	r0, r4
+ 1416 0058 FFF7FEFF 		bl	FormatCANFrame
+ 1417              	.LVL129:
+ 1418 005c 35E0     		b	.L101
+ 1419              	.LVL130:
+ 1420              	.L103:
+ 1421              	.LBB21:
+ 322:Core/Src/UDS.c ****                 {
+ 323:Core/Src/UDS.c ****                     data_tx[i] = 0x00;
+ 1422              		.loc 1 323 21 view .LVU440
+ 1423              		.loc 1 323 32 is_stmt 0 view .LVU441
+ 1424 005e 0022     		movs	r2, #0
+ 1425 0060 E254     		strb	r2, [r4, r3]
+ 321:Core/Src/UDS.c ****                 {
+ 1426              		.loc 1 321 41 is_stmt 1 discriminator 3 view .LVU442
+ 1427 0062 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 35
+
+
+ 1428              	.LVL131:
+ 1429              	.L102:
+ 321:Core/Src/UDS.c ****                 {
+ 1430              		.loc 1 321 35 discriminator 1 view .LVU443
+ 1431 0064 072B     		cmp	r3, #7
+ 1432 0066 FADD     		ble	.L103
+ 1433              	.LBE21:
+ 324:Core/Src/UDS.c ****                 }
+ 325:Core/Src/UDS.c ****                 FormatCANFrame(data_tx);
+ 1434              		.loc 1 325 17 view .LVU444
+ 1435 0068 2046     		mov	r0, r4
+ 1436 006a FFF7FEFF 		bl	FormatCANFrame
+ 1437              	.LVL132:
+ 1438              		.loc 1 325 17 is_stmt 0 view .LVU445
+ 1439 006e 2CE0     		b	.L101
+ 1440              	.LVL133:
+ 1441              	.L99:
+ 326:Core/Src/UDS.c ****                 // Expected Res: 03 7F 2E 33 55 55 55 55
+ 327:Core/Src/UDS.c ****             }
+ 328:Core/Src/UDS.c ****         }
+ 329:Core/Src/UDS.c ****         else
+ 330:Core/Src/UDS.c ****         {
+ 331:Core/Src/UDS.c ****             data_tx[0] = 0x03;
+ 1442              		.loc 1 331 13 is_stmt 1 view .LVU446
+ 1443              		.loc 1 331 24 is_stmt 0 view .LVU447
+ 1444 0070 0323     		movs	r3, #3
+ 1445 0072 2370     		strb	r3, [r4]
+ 332:Core/Src/UDS.c ****             data_tx[1] = NRC;
+ 1446              		.loc 1 332 13 is_stmt 1 view .LVU448
+ 1447              		.loc 1 332 24 is_stmt 0 view .LVU449
+ 1448 0074 7F23     		movs	r3, #127
+ 1449 0076 6370     		strb	r3, [r4, #1]
+ 333:Core/Src/UDS.c ****             data_tx[2] = 0x2E;
+ 1450              		.loc 1 333 13 is_stmt 1 view .LVU450
+ 1451              		.loc 1 333 24 is_stmt 0 view .LVU451
+ 1452 0078 2E23     		movs	r3, #46
+ 1453 007a A370     		strb	r3, [r4, #2]
+ 334:Core/Src/UDS.c ****             data_tx[3] = INVALID_DID;
+ 1454              		.loc 1 334 13 is_stmt 1 view .LVU452
+ 1455              		.loc 1 334 24 is_stmt 0 view .LVU453
+ 1456 007c 3123     		movs	r3, #49
+ 1457 007e E370     		strb	r3, [r4, #3]
+ 335:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1458              		.loc 1 335 13 is_stmt 1 view .LVU454
+ 1459              	.LBB22:
+ 1460              		.loc 1 335 18 view .LVU455
+ 1461              	.LVL134:
+ 1462              		.loc 1 335 22 is_stmt 0 view .LVU456
+ 1463 0080 0423     		movs	r3, #4
+ 1464              	.LVL135:
+ 1465              	.L104:
+ 1466              		.loc 1 335 31 is_stmt 1 discriminator 1 view .LVU457
+ 1467 0082 072B     		cmp	r3, #7
+ 1468 0084 03DC     		bgt	.L110
+ 336:Core/Src/UDS.c ****             {
+ 337:Core/Src/UDS.c ****                 data_tx[i] = 0x00;
+ 1469              		.loc 1 337 17 view .LVU458
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 36
+
+
+ 1470              		.loc 1 337 28 is_stmt 0 view .LVU459
+ 1471 0086 0022     		movs	r2, #0
+ 1472 0088 E254     		strb	r2, [r4, r3]
+ 335:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1473              		.loc 1 335 37 is_stmt 1 discriminator 3 view .LVU460
+ 1474 008a 0133     		adds	r3, r3, #1
+ 1475              	.LVL136:
+ 335:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1476              		.loc 1 335 37 is_stmt 0 discriminator 3 view .LVU461
+ 1477 008c F9E7     		b	.L104
+ 1478              	.L110:
+ 335:Core/Src/UDS.c ****             for (int i = 4; i < 8; i++)
+ 1479              		.loc 1 335 37 discriminator 3 view .LVU462
+ 1480              	.LBE22:
+ 338:Core/Src/UDS.c ****             }
+ 339:Core/Src/UDS.c ****             FormatCANFrame(data_tx);
+ 1481              		.loc 1 339 13 is_stmt 1 view .LVU463
+ 1482 008e 2046     		mov	r0, r4
+ 1483 0090 FFF7FEFF 		bl	FormatCANFrame
+ 1484              	.LVL137:
+ 1485              		.loc 1 339 13 is_stmt 0 view .LVU464
+ 1486 0094 19E0     		b	.L101
+ 1487              	.LVL138:
+ 1488              	.L98:
+ 340:Core/Src/UDS.c ****             // Expected Res: 03 7F 2E 31 55 55 55 55
+ 341:Core/Src/UDS.c ****         }
+ 342:Core/Src/UDS.c ****     }
+ 343:Core/Src/UDS.c ****     else
+ 344:Core/Src/UDS.c ****     {
+ 345:Core/Src/UDS.c ****         newStdId = ((data_rx[4] << 8) | data_rx[5]) & 0x7FF;
+ 1489              		.loc 1 345 9 is_stmt 1 view .LVU465
+ 1490              		.loc 1 345 29 is_stmt 0 view .LVU466
+ 1491 0096 2A79     		ldrb	r2, [r5, #4]	@ zero_extendqisi2
+ 1492              		.loc 1 345 48 view .LVU467
+ 1493 0098 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
+ 1494              		.loc 1 345 39 view .LVU468
+ 1495 009a 43EA0223 		orr	r3, r3, r2, lsl #8
+ 1496              		.loc 1 345 53 view .LVU469
+ 1497 009e C3F30A03 		ubfx	r3, r3, #0, #11
+ 1498              		.loc 1 345 18 view .LVU470
+ 1499 00a2 104A     		ldr	r2, .L111+4
+ 1500 00a4 1380     		strh	r3, [r2]	@ movhi
+ 346:Core/Src/UDS.c ****         data_tx[0] = 0x03;
+ 1501              		.loc 1 346 9 is_stmt 1 view .LVU471
+ 1502              		.loc 1 346 20 is_stmt 0 view .LVU472
+ 1503 00a6 0323     		movs	r3, #3
+ 1504 00a8 2370     		strb	r3, [r4]
+ 347:Core/Src/UDS.c ****         data_tx[1] = NRC;
+ 1505              		.loc 1 347 9 is_stmt 1 view .LVU473
+ 1506              		.loc 1 347 20 is_stmt 0 view .LVU474
+ 1507 00aa 7F23     		movs	r3, #127
+ 1508 00ac 6370     		strb	r3, [r4, #1]
+ 348:Core/Src/UDS.c ****         data_tx[2] = 0x2E;
+ 1509              		.loc 1 348 9 is_stmt 1 view .LVU475
+ 1510              		.loc 1 348 20 is_stmt 0 view .LVU476
+ 1511 00ae 2E23     		movs	r3, #46
+ 1512 00b0 A370     		strb	r3, [r4, #2]
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 37
+
+
+ 349:Core/Src/UDS.c ****         data_tx[3] = INVALID_LENGTH;
+ 1513              		.loc 1 349 9 is_stmt 1 view .LVU477
+ 1514              		.loc 1 349 20 is_stmt 0 view .LVU478
+ 1515 00b2 1323     		movs	r3, #19
+ 1516 00b4 E370     		strb	r3, [r4, #3]
+ 350:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 1517              		.loc 1 350 9 is_stmt 1 view .LVU479
+ 1518              	.LBB23:
+ 1519              		.loc 1 350 14 view .LVU480
+ 1520              	.LVL139:
+ 1521              		.loc 1 350 18 is_stmt 0 view .LVU481
+ 1522 00b6 0423     		movs	r3, #4
+ 1523              		.loc 1 350 9 view .LVU482
+ 1524 00b8 02E0     		b	.L106
+ 1525              	.LVL140:
+ 1526              	.L107:
+ 351:Core/Src/UDS.c ****         {
+ 352:Core/Src/UDS.c ****             data_tx[i] = 0x00;
+ 1527              		.loc 1 352 13 is_stmt 1 view .LVU483
+ 1528              		.loc 1 352 24 is_stmt 0 view .LVU484
+ 1529 00ba 0022     		movs	r2, #0
+ 1530 00bc E254     		strb	r2, [r4, r3]
+ 350:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 1531              		.loc 1 350 33 is_stmt 1 discriminator 3 view .LVU485
+ 1532 00be 0133     		adds	r3, r3, #1
+ 1533              	.LVL141:
+ 1534              	.L106:
+ 350:Core/Src/UDS.c ****         for (int i = 4; i < 8; i++)
+ 1535              		.loc 1 350 27 discriminator 1 view .LVU486
+ 1536 00c0 072B     		cmp	r3, #7
+ 1537 00c2 FADD     		ble	.L107
+ 1538              	.LBE23:
+ 353:Core/Src/UDS.c ****         }
+ 354:Core/Src/UDS.c ****         FormatCANFrame(data_tx);
+ 1539              		.loc 1 354 9 view .LVU487
+ 1540 00c4 2046     		mov	r0, r4
+ 1541 00c6 FFF7FEFF 		bl	FormatCANFrame
+ 1542              	.LVL142:
+ 1543              	.L101:
+ 355:Core/Src/UDS.c ****     }
+ 356:Core/Src/UDS.c ****     HAL_CAN_AddTxMessage(&hcan2, &CAN2_pHeader, data_tx, &CAN2_pTxMailbox);
+ 1544              		.loc 1 356 5 view .LVU488
+ 1545 00ca 074B     		ldr	r3, .L111+8
+ 1546 00cc 2246     		mov	r2, r4
+ 1547 00ce 0749     		ldr	r1, .L111+12
+ 1548 00d0 0748     		ldr	r0, .L111+16
+ 1549 00d2 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 1550              	.LVL143:
+ 357:Core/Src/UDS.c ****     HAL_Delay(1000);
+ 1551              		.loc 1 357 5 view .LVU489
+ 1552 00d6 4FF47A70 		mov	r0, #1000
+ 1553 00da FFF7FEFF 		bl	HAL_Delay
+ 1554              	.LVL144:
+ 358:Core/Src/UDS.c **** }
+ 1555              		.loc 1 358 1 is_stmt 0 view .LVU490
+ 1556 00de 38BD     		pop	{r3, r4, r5, pc}
+ 1557              	.LVL145:
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 38
+
+
+ 1558              	.L112:
+ 1559              		.loc 1 358 1 view .LVU491
+ 1560              		.align	2
+ 1561              	.L111:
+ 1562 00e0 00000000 		.word	flag_SecurityUnlocked
+ 1563 00e4 00000000 		.word	newStdId
+ 1564 00e8 00000000 		.word	CAN2_pTxMailbox
+ 1565 00ec 00000000 		.word	CAN2_pHeader
+ 1566 00f0 00000000 		.word	hcan2
+ 1567              		.cfi_endproc
+ 1568              	.LFE149:
+ 1570              		.section	.rodata.HAL_TIM_PeriodElapsedCallback.str1.4,"aMS",%progbits,1
+ 1571              		.align	2
+ 1572              	.LC4:
+ 1573 0000 53657373 		.ascii	"Session Locked\000"
+ 1573      696F6E20 
+ 1573      4C6F636B 
+ 1573      656400
+ 1574              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 1575              		.align	1
+ 1576              		.global	HAL_TIM_PeriodElapsedCallback
+ 1577              		.syntax unified
+ 1578              		.thumb
+ 1579              		.thumb_func
+ 1581              	HAL_TIM_PeriodElapsedCallback:
+ 1582              	.LVL146:
+ 1583              	.LFB150:
+ 359:Core/Src/UDS.c **** 
+ 360:Core/Src/UDS.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 361:Core/Src/UDS.c **** {
+ 1584              		.loc 1 361 1 is_stmt 1 view -0
+ 1585              		.cfi_startproc
+ 1586              		@ args = 0, pretend = 0, frame = 0
+ 1587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1588              		.loc 1 361 1 is_stmt 0 view .LVU493
+ 1589 0000 08B5     		push	{r3, lr}
+ 1590              		.cfi_def_cfa_offset 8
+ 1591              		.cfi_offset 3, -8
+ 1592              		.cfi_offset 14, -4
+ 362:Core/Src/UDS.c ****     if (htim == &htim2)
+ 1593              		.loc 1 362 5 is_stmt 1 view .LVU494
+ 1594              		.loc 1 362 8 is_stmt 0 view .LVU495
+ 1595 0002 0B4B     		ldr	r3, .L117
+ 1596 0004 8342     		cmp	r3, r0
+ 1597 0006 00D0     		beq	.L116
+ 1598              	.LVL147:
+ 1599              	.L113:
+ 363:Core/Src/UDS.c ****     {
+ 364:Core/Src/UDS.c ****         if (flag_SecurityUnlocked == 0)
+ 365:Core/Src/UDS.c ****             return;
+ 366:Core/Src/UDS.c ****         else
+ 367:Core/Src/UDS.c ****         {
+ 368:Core/Src/UDS.c ****             HAL_TIM_Base_Stop_IT(&htim2);
+ 369:Core/Src/UDS.c ****             flag_SecurityUnlocked = 0;
+ 370:Core/Src/UDS.c ****             HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 371:Core/Src/UDS.c ****             USART3_SendString((uint8_t *)"Session Locked");
+ 372:Core/Src/UDS.c ****         }
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 39
+
+
+ 373:Core/Src/UDS.c ****     }
+ 374:Core/Src/UDS.c **** }...
+ 1600              		.loc 1 374 1 view .LVU496
+ 1601 0008 08BD     		pop	{r3, pc}
+ 1602              	.LVL148:
+ 1603              	.L116:
+ 364:Core/Src/UDS.c ****         if (flag_SecurityUnlocked == 0)
+ 1604              		.loc 1 364 9 is_stmt 1 view .LVU497
+ 364:Core/Src/UDS.c ****         if (flag_SecurityUnlocked == 0)
+ 1605              		.loc 1 364 35 is_stmt 0 view .LVU498
+ 1606 000a 0A4B     		ldr	r3, .L117+4
+ 1607 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 364:Core/Src/UDS.c ****         if (flag_SecurityUnlocked == 0)
+ 1608              		.loc 1 364 12 view .LVU499
+ 1609 000e 002B     		cmp	r3, #0
+ 1610 0010 FAD0     		beq	.L113
+ 368:Core/Src/UDS.c ****             HAL_TIM_Base_Stop_IT(&htim2);
+ 1611              		.loc 1 368 13 is_stmt 1 view .LVU500
+ 1612 0012 0748     		ldr	r0, .L117
+ 1613              	.LVL149:
+ 368:Core/Src/UDS.c ****             HAL_TIM_Base_Stop_IT(&htim2);
+ 1614              		.loc 1 368 13 is_stmt 0 view .LVU501
+ 1615 0014 FFF7FEFF 		bl	HAL_TIM_Base_Stop_IT
+ 1616              	.LVL150:
+ 369:Core/Src/UDS.c ****             flag_SecurityUnlocked = 0;
+ 1617              		.loc 1 369 13 is_stmt 1 view .LVU502
+ 369:Core/Src/UDS.c ****             flag_SecurityUnlocked = 0;
+ 1618              		.loc 1 369 35 is_stmt 0 view .LVU503
+ 1619 0018 0022     		movs	r2, #0
+ 1620 001a 064B     		ldr	r3, .L117+4
+ 1621 001c 1A70     		strb	r2, [r3]
+ 370:Core/Src/UDS.c ****             HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+ 1622              		.loc 1 370 13 is_stmt 1 view .LVU504
+ 1623 001e 0121     		movs	r1, #1
+ 1624 0020 0548     		ldr	r0, .L117+8
+ 1625 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1626              	.LVL151:
+ 371:Core/Src/UDS.c ****             USART3_SendString((uint8_t *)"Session Locked");
+ 1627              		.loc 1 371 13 view .LVU505
+ 1628 0026 0548     		ldr	r0, .L117+12
+ 1629 0028 FFF7FEFF 		bl	USART3_SendString
+ 1630              	.LVL152:
+ 1631 002c ECE7     		b	.L113
+ 1632              	.L118:
+ 1633 002e 00BF     		.align	2
+ 1634              	.L117:
+ 1635 0030 00000000 		.word	htim2
+ 1636 0034 00000000 		.word	flag_SecurityUnlocked
+ 1637 0038 00040240 		.word	1073873920
+ 1638 003c 00000000 		.word	.LC4
+ 1639              		.cfi_endproc
+ 1640              	.LFE150:
+ 1642              		.global	newStdId
+ 1643              		.section	.bss.newStdId,"aw",%nobits
+ 1644              		.align	1
+ 1647              	newStdId:
+ 1648 0000 0000     		.space	2
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 40
+
+
+ 1649              		.global	flag_SecurityUnlocked
+ 1650              		.section	.bss.flag_SecurityUnlocked,"aw",%nobits
+ 1653              	flag_SecurityUnlocked:
+ 1654 0000 00       		.space	1
+ 1655              		.global	flag_SeedProvided
+ 1656              		.section	.bss.flag_SeedProvided,"aw",%nobits
+ 1659              	flag_SeedProvided:
+ 1660 0000 00       		.space	1
+ 1661              		.global	Key
+ 1662              		.section	.bss.Key,"aw",%nobits
+ 1663              		.align	2
+ 1666              	Key:
+ 1667 0000 00000000 		.space	4
+ 1668              		.global	Seed
+ 1669              		.section	.data.Seed,"aw"
+ 1670              		.align	2
+ 1673              	Seed:
+ 1674 0000 01088221 		.ascii	"\001\010\202!"
+ 1675              		.text
+ 1676              	.Letext0:
+ 1677              		.file 2 "C:/Users/PC/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools
+ 1678              		.file 3 "C:/Users/PC/AppData/Roaming/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools
+ 1679              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h"
+ 1680              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
+ 1681              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1682              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1683              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1684              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h"
+ 1685              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
+ 1686              		.file 11 "Core/Inc/UDS.h"
+ 1687              		.file 12 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 UDS.c
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:21     .text.getSID:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:27     .text.getSID:00000000 getSID
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:45     .text.getDID:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:51     .text.getDID:00000000 getDID
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:81     .rodata.CAN1_Send.str1.4:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:85     .text.CAN1_Send:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:91     .text.CAN1_Send:00000000 CAN1_Send
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:138    .text.CAN1_Send:0000002c $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:147    .text.CAN2_Send:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:153    .text.CAN2_Send:00000000 CAN2_Send
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:196    .text.CAN2_Send:00000024 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:204    .text.FormatCANFrame:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:210    .text.FormatCANFrame:00000000 FormatCANFrame
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:260    .text.calculate_key_from_seed:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:266    .text.calculate_key_from_seed:00000000 calculate_key_from_seed
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:314    .text.cmp_key:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:320    .text.cmp_key:00000000 cmp_key
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:390    .rodata.checkFormat.str1.4:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:394    .text.checkFormat:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:400    .text.checkFormat:00000000 checkFormat
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:510    .text.checkFormat:0000004c $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:515    .text.checkDID:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:521    .text.checkDID:00000000 checkDID
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:563    .rodata.UART_ReadString.str1.4:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:567    .text.UART_ReadString:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:573    .text.UART_ReadString:00000000 UART_ReadString
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:671    .text.UART_ReadString:00000044 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:676    .text.SID22_Practice:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:682    .text.SID22_Practice:00000000 SID22_Practice
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:860    .text.SID22_Practice:00000094 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:867    .rodata.SID27_Practice.str1.4:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:871    .text.SID27_Practice:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:877    .text.SID27_Practice:00000000 SID27_Practice
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1290   .text.SID27_Practice:0000016c $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1673   .data.Seed:00000000 Seed
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1659   .bss.flag_SeedProvided:00000000 flag_SeedProvided
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1666   .bss.Key:00000000 Key
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1653   .bss.flag_SecurityUnlocked:00000000 flag_SecurityUnlocked
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1304   .text.SID2E_Practice:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1310   .text.SID2E_Practice:00000000 SID2E_Practice
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1562   .text.SID2E_Practice:000000e0 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1647   .bss.newStdId:00000000 newStdId
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1571   .rodata.HAL_TIM_PeriodElapsedCallback.str1.4:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1575   .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1581   .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1635   .text.HAL_TIM_PeriodElapsedCallback:00000030 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1644   .bss.newStdId:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1654   .bss.flag_SecurityUnlocked:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1660   .bss.flag_SeedProvided:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1663   .bss.Key:00000000 $d
+C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s:1670   .data.Seed:00000000 $d
+
+UNDEFINED SYMBOLS
+USART3_SendString
+PrintCANLog
+ARM GAS  C:\Users\PC\AppData\Local\Temp\ccC7FUVY.s 			page 42
+
+
+HAL_CAN_AddTxMessage
+Error_Handler
+CAN1_pHeader
+CAN1_DATA_TX
+CAN1_pTxMailbox
+hcan1
+CAN2_pHeader
+CAN2_DATA_TX
+CAN2_pTxMailbox
+hcan2
+HAL_Delay
+HAL_TIM_Base_Start_IT
+HAL_GPIO_WritePin
+htim2
+HAL_TIM_Base_Stop_IT

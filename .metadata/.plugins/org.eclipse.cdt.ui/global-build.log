@@ -1,0 +1,44 @@
+14:25:50 **** Incremental Build of configuration Debug for project BEA_CAN2CAN_DEMO_TEN1HC_HUST ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F405xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'PrintCANLog':
+../Core/Src/main.c:503:25: warning: '%03X' directive writing between 3 and 4 bytes into a region of size 3 [-Wformat-overflow=]
+  503 |         sprintf(bufID, "%03X", CANID);
+      |                         ^~~~
+../Core/Src/main.c:503:24: note: directive argument in the range [0, 65535]
+  503 |         sprintf(bufID, "%03X", CANID);
+      |                        ^~~~~~
+../Core/Src/main.c:503:9: note: 'sprintf' output between 4 and 5 bytes into a destination of size 3
+  503 |         sprintf(bufID, "%03X", CANID);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:511:38: warning: 'sprintf' writing a terminating nul past the end of the destination [-Wformat-overflow=]
+  511 |                 sprintf(bufDat, "%02X", CAN_Frame[loopIndx]);
+      |                                      ^
+../Core/Src/main.c:511:17: note: 'sprintf' output 3 bytes into a destination of size 2
+  511 |                 sprintf(bufDat, "%02X", CAN_Frame[loopIndx]);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\PC\Downloads\BOSCH_PRATCICE_UDS 1\BOSCH_PRATCICE_UDS\BEA_CAN2CAN_DEMO_TEN1HC_HUST\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BEA_CAN2CAN_DEMO_TEN1HC_HUST.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.16.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf has a LOAD segment with RWX permissions
+Finished building target: BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf
+ 
+arm-none-eabi-size  BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf 
+arm-none-eabi-objdump -h -S BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf  > "BEA_CAN2CAN_DEMO_TEN1HC_HUST.list"
+arm-none-eabi-objcopy  -O ihex BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf  "BEA_CAN2CAN_DEMO_TEN1HC_HUST.hex"
+   text	   data	    bss	    dec	    hex	filename
+  23424	    144	   6472	  30040	   7558	BEA_CAN2CAN_DEMO_TEN1HC_HUST.elf
+Finished building: default.size.stdout
+ 
+Finished building: BEA_CAN2CAN_DEMO_TEN1HC_HUST.hex
+ 
+Finished building: BEA_CAN2CAN_DEMO_TEN1HC_HUST.list
+ 
+14:28:24 **** Incremental Build of configuration Debug for project BEA_CAN2CAN_DEMO_TEN1HC_HUST ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F405xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:186:66: error: 'check' undeclared (first use in this function)
+  186 |                                         sprintf(buf, "Flag: %d", check);
+      |                                                                  ^~~~~
+../Core/Src/main.c:186:66: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:46: Core/Src/main.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
